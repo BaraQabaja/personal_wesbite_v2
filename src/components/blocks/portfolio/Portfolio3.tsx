@@ -4,7 +4,7 @@ import Carousel from 'components/reuseable/Carousel';
 
 import NextLink from 'components/reuseable/links/NextLink';
 import React, { useState } from 'react';
-import { Link } from 'react-scroll';
+import { Link,scroller } from 'react-scroll';
 
 // -------- data -------- //
 import { portfolioList2 } from 'data/portfolio';
@@ -36,6 +36,15 @@ const Portfolio3: FC = () => {
     setSelectedProject(props);
   };
 
+
+  const handleScroll = () => {
+    scroller.scrollTo('projects', {
+      duration: 500,
+      delay: 0,
+      smooth: false,
+      offset: -50, // Adjust this value based on your layout
+    });
+  };
   return (
     <div id='projects' className="overflow-hidden">
       <div className="container pt-12 pt-lg-7 pb-14 pb-md-16">
@@ -102,12 +111,10 @@ const Portfolio3: FC = () => {
         <div className="modal-dialog modal-dialog-centered modal-xl">
           <div className="modal-content text-center">
             <div className=" px-2 px-md-9 modal-body" >
-            <button className="btn-close" data-bs-dismiss="modal" aria-label="Close"  onClick={() => {
-    const element = document.getElementById('projects');
-    if (element) {
-      element.scrollIntoView({  block: 'start' });
-    }
-  }}>
+            <button className="btn-close" data-bs-dismiss="modal" aria-label="Close"   onClick={() => {
+                  handleScroll();
+                }}>
+
          </button>
 
               {selectedProject &&<About30 project={selectedProject}/>}
