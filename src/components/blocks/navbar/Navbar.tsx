@@ -1,6 +1,8 @@
-import Link from 'next/link';
+// import Link  from 'next/link';
 import LinkType from 'types/link';
 import { FC, Fragment, ReactElement, useRef } from 'react';
+import { Link } from 'react-scroll';
+
 // -------- custom hook -------- //
 import useSticky from 'hooks/useSticky';
 import useNestedDropdown from 'hooks/useNestedDropdown';
@@ -13,19 +15,18 @@ import DropdownToggleLink from 'components/reuseable/links/DropdownToggleLink';
 import Info from './partials/Info';
 import Search from './partials/Search';
 import Social from './partials/Social';
-import Signin from './partials/Signin';
-import Signup from './partials/Signup';
+
 import Language from './partials/Language';
 import MiniCart from './partials/MiniCart';
 // -------- data -------- //
-import {
-  demos,
-  pages,
-  blogsNavigation,
-  blocksNavigation,
-  projectsNavigation,
-  documentionNavigation
-} from 'data/navigation';
+// import {
+//   demos,
+//   pages,
+//   blogsNavigation,
+//   blocksNavigation,
+//   projectsNavigation,
+//   documentionNavigation
+// } from 'data/navigation';
 
 // ===================================================================
 type NavbarProps = {
@@ -57,166 +58,62 @@ const Navbar: FC<NavbarProps> = (props) => {
   const fixedClassName = 'navbar navbar-expand-lg center-nav transparent navbar-light navbar-clone fixed';
 
   // render inner nav item links
-  const renderLinks = (links: LinkType[]) => {
-    return links.map((item) => (
-      <ListItemLink href={item.url} title={item.title} linkClassName="dropdown-item" key={item.id} />
-    ));
-  };
+  // const renderLinks = (links: LinkType[]) => {
+  //   return links.map((item) => (
+  //     <ListItemLink href={item.url} title={item.title} linkClassName="dropdown-item" key={item.id} />
+  //   ));
+  // };
 
   // all main header contents
   const headerContent = (
     <Fragment>
-      <div className="navbar-brand w-100">
-        <NextLink href="/" title={<img alt="logo" src={`/img/${logo}.png`} srcSet={`/img/${logo}@2x.png 2x`} />} />
+      <div className="navbar-brand w-50 ">
+        {/* <NextLink href="/" title={<img alt="logo" src={`/img/${logo}.png`} srcSet={`/img/${logo}@2x.png 2x`} />} /> */}
       </div>
 
+      
       <div id="offcanvas-nav" data-bs-scroll="true" className="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
         <div className="offcanvas-header d-lg-none">
-          <h3 className="text-white fs-30 mb-0">Sandbox</h3>
+          <h3 className="text-white fs-30 mb-0"></h3>
           <button type="button" aria-label="Close" data-bs-dismiss="offcanvas" className="btn-close btn-close-white" />
         </div>
 
         <div className="offcanvas-body ms-lg-auto d-flex flex-column h-100">
           <ul className="navbar-nav">
-            {/* ===================== demos nav item ===================== */}
-            <li className="nav-item dropdown dropdown-mega">
-              <DropdownToggleLink title="Demos" className="nav-link dropdown-toggle" />
-
-              <ul className="dropdown-menu mega-menu mega-menu-dark mega-menu-img">
-                <li className="mega-menu-content mega-menu-scroll">
-                  <ul className="row row-cols-1 row-cols-lg-6 gx-0 gx-lg-4 gy-lg-2 list-unstyled">
-                    {demos.map(({ id, title, url, thumnail }) => (
-                      <li className="col" key={id}>
-                        <Link href={url} passHref legacyBehavior>
-                          <a className="dropdown-item">
-                            <img
-                              alt={title}
-                              src={`/img/demos/${thumnail}.jpg`}
-                              srcSet={`/img/demos/${thumnail}@2x.jpg 2x`}
-                              className="rounded lift d-none d-lg-block"
-                            />
-                            <span className="d-lg-none">{title}</span>
-                          </a>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-
-                  <span className="d-none d-lg-flex">
-                    <i className="uil uil-direction" />
-                    <strong>Scroll to view more</strong>
-                  </span>
-                </li>
-              </ul>
+          <li className="nav-item ">
+              <Link to="home" spy={true} smooth={true} offset={-50} duration={500} className="nav-link hover  pb-0 mb-5">
+                Home
+              </Link>
             </li>
 
-            {/*  ===================== pages nav item  ===================== */}
-            <li className="nav-item dropdown">
-              <DropdownToggleLink title="Pages" className="nav-link dropdown-toggle" />
-
-              <ul className="dropdown-menu">
-                {pages.map(({ id, title, children }) => {
-                  return (
-                    <li className="dropdown dropdown-submenu dropend" key={id}>
-                      <DropdownToggleLink title={title} className="dropdown-item dropdown-toggle" />
-                      <ul className="dropdown-menu">{renderLinks(children)}</ul>
-                    </li>
-                  );
-                })}
-
-                <ListItemLink href="/pricing" title="Pricing" linkClassName="dropdown-item" />
-              </ul>
+            {/* <li className="nav-item ">
+              <Link to="about" spy={true} smooth={true} offset={-50} duration={500} className="nav-link hover  pb-0 mb-5">
+                About
+              </Link>
+            </li> */}
+ <li className="nav-item ">
+              <Link to="experience" spy={true} smooth={true} offset={-50} duration={500}  className="nav-link hover pb-0 mb-5">Experience</Link>
+            </li>
+            <li className="nav-item ">
+              <Link to="tech-talk" spy={true} smooth={true} offset={-50} duration={500}  className="nav-link hover pb-0 mb-5">Tech-Talks</Link>
+            </li>
+            <li className="nav-item ">
+              <Link to="projects" spy={true} smooth={true} offset={-50} duration={500} className="nav-link hover pb-0 mb-5 cursor-pointer">Projects</Link>
             </li>
 
-            {/* ===================== projects nav item  ===================== */}
-            <li className="nav-item dropdown">
-              <DropdownToggleLink title="Projects" className="nav-link dropdown-toggle" />
-
-              <div className="dropdown-menu dropdown-lg">
-                <div className="dropdown-lg-content">
-                  {projectsNavigation.map(({ title, children }, i) => (
-                    <div key={title + i}>
-                      <h6 className="dropdown-header">{title}</h6>
-                      <ul className="list-unstyled">{renderLinks(children)}</ul>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </li>
-
-            {/* ===================== blog nav item ===================== */}
-            <li className="nav-item dropdown">
-              <DropdownToggleLink title="Blog" className="nav-link dropdown-toggle" />
-
-              <ul className="dropdown-menu">
-                {blogsNavigation.map(({ id, url, title, children }) => {
-                  if (!url && children) {
-                    return (
-                      <li className="dropdown dropdown-submenu dropend" key={id}>
-                        <DropdownToggleLink title="Blog Posts" />
-                        <ul className="dropdown-menu">{renderLinks(children)}</ul>
-                      </li>
-                    );
-                  }
-                  return <ListItemLink key={id} href={url} title={title} linkClassName="dropdown-item" />;
-                })}
-              </ul>
-            </li>
-
-            {/* ===================== blocks nav item ===================== */}
-            <li className="nav-item dropdown dropdown-mega">
-              <DropdownToggleLink title="Blocks" className="nav-link dropdown-toggle" />
-              <ul className="dropdown-menu mega-menu mega-menu-dark mega-menu-img">
-                <li className="mega-menu-content">
-                  <ul className="row row-cols-1 row-cols-lg-6 gx-0 gx-lg-6 gy-lg-4 list-unstyled">
-                    {blocksNavigation.map(({ id, thumnail, title, url }) => (
-                      <li className="col" key={id}>
-                        <Link href={url} passHref legacyBehavior>
-                          <a className="dropdown-item">
-                            <div className="rounded img-svg d-none d-lg-block p-4 mb-lg-2">
-                              <img className="rounded-0" src={thumnail} alt="" />
-                            </div>
-
-                            <span>{title}</span>
-                          </a>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
-                </li>
-              </ul>
-            </li>
-
-            {/* ===================== documentation nav item ===================== */}
-            <li className="nav-item dropdown dropdown-mega">
-              <DropdownToggleLink title="Documentation" className="nav-link dropdown-toggle" />
-              <ul className="dropdown-menu mega-menu">
-                <li className="mega-menu-content">
-                  <div className="row gx-0 gx-lg-3">
-                    <div className="col-lg-4">
-                      <h6 className="dropdown-header">Usage</h6>
-                      <ul className="list-unstyled cc-2 pb-lg-1">{renderLinks(documentionNavigation.usage)}</ul>
-
-                      <h6 className="dropdown-header mt-lg-6">Styleguide</h6>
-                      <ul className="list-unstyled cc-2">{renderLinks(documentionNavigation.styleguide)}</ul>
-                    </div>
-
-                    <div className="col-lg-8">
-                      <h6 className="dropdown-header">Elements</h6>
-                      <ul className="list-unstyled cc-3">{renderLinks(documentionNavigation.elements)}</ul>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
+           
+            
           </ul>
 
           {/* ============= show contact info in the small device sidebar ============= */}
           <div className="offcanvas-footer d-lg-none">
             <div>
-              <NextLink title="info@email.com" className="link-inverse" href="mailto:first.last@email.com" />
+            <NextLink title="ceo@sharkod.com" className="link-inverse" href="mailto:ceo@sharkod.com" />
+            <br />
+
+              <NextLink title="bara.qabaja@gmail.com" className="link-inverse" href="mailto:bara.qabaja@gmail.com" />
               <br />
-              <NextLink href="tel:0123456789" title="00 (123) 456 78 90" />
+              <NextLink href="tel:(+972) 059-938-7258" title="(+972) 059-938-7258" />
               <br />
               <SocialLinks />
             </div>
@@ -296,10 +193,10 @@ const Navbar: FC<NavbarProps> = (props) => {
       </nav>
 
       {/* ============= signin modal ============= */}
-      <Signin />
+      {/* <Signin /> */}
 
       {/* ============= signup modal ============= */}
-      <Signup />
+      {/* <Signup /> */}
 
       {/* ============= info sidebar ============= */}
       {info && <Info />}

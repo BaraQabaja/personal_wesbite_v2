@@ -35744,11 +35744,16 @@ button.hamburger span {
   stroke: rgba(63, 120, 224, 0.1);
 }
 
-@media (min-width: 576px) {
+/* ADDED BY BARA */
+.progress-wrap.active-progress {
+  opacity: 1;
+}
+
+/* @media (min-width: 576px) {
   .progress-wrap.active-progress {
     opacity: 1;
   }
-}
+} */
 .progress-wrap {
   position: fixed;
   right: 1.5rem;

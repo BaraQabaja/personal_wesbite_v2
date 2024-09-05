@@ -17,7 +17,7 @@ const Pagination: FC<PaginationProps> = (props) => {
       <ul className={`pagination ${altStyle ? 'pagination-alt' : ''}`}>
         <li className="page-item disabled">{NextPreviousBtn('#', 'uil-arrow-left')}</li>
 
-        {[1, 2, 3].map((item, i) => (
+        {[1].map((item, i) => (
           <li className={`page-item ${i === 0 ? 'active' : ''}`} key={item}>
             <button className="page-link">{item}</button>
           </li>

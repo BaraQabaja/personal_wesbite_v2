@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FC, ReactElement } from 'react';
+import { FC, ReactElement,useState } from 'react';
 import NextLink from '../links/NextLink';
 
 // ========================================================
@@ -14,13 +14,23 @@ type BlogCard2Props = {
 
 const BlogCard2: FC<BlogCard2Props> = (props) => {
   const { cardTop, title, category, description, link } = props;
+  // State to toggle the full content visibility
+  const [isExpanded, setIsExpanded] = useState(false);
 
+  // Split the description into paragraphs
+  const descriptionParts = description.split('</p>');
+  
+  // Show only the first paragraph initially
+  const firstParagraph = descriptionParts[0] + '</p>'+descriptionParts[1] +' . . .' + '</p>';
+
+  // Full description including all paragraphs
+  const fullDescription = descriptionParts.join('</p>');
   return (
     <article className="post">
       <div className="card">
         {cardTop}
 
-        <div className="card-body">
+        <div className="card-body" style={{padding: '1rem',}}>
           <div className="post-header">
             <div className="post-category text-line">
               <NextLink title={category} href="#" className="hover" />
@@ -32,7 +42,16 @@ const BlogCard2: FC<BlogCard2Props> = (props) => {
           </div>
 
           <div className="post-content">
-            <p>{description}</p>
+            <div
+              className="description"
+              dangerouslySetInnerHTML={{ __html: isExpanded ? fullDescription : firstParagraph }}
+            />
+            <button
+              className="btn btn-outline-primary"
+              onClick={() => setIsExpanded(!isExpanded)}
+            >
+              {isExpanded ? 'Read Less' : 'Read More'}
+            </button>
           </div>
         </div>
 
@@ -40,33 +59,33 @@ const BlogCard2: FC<BlogCard2Props> = (props) => {
           <ul className="post-meta d-flex mb-0">
             <li className="post-date">
               <i className="uil uil-calendar-alt" />
-              <span>5 Jul 2022</span>
+              <span>1 Sep 2023</span>
             </li>
 
-            <li className="post-author">
-              <Link href="#" passHref legacyBehavior>
-                <a>
+            <li className="">
+              {/* <Link href="#" passHref legacyBehavior>
+                <a> */}
                   <i className="uil uil-user" />
-                  <span>By Sandbox</span>
-                </a>
-              </Link>
+                  <span>By Bara Qabaja</span>
+                {/* </a>
+              </Link> */}
             </li>
 
-            <li className="post-comments">
+            {/* <li className="post-comments">
               <Link href="#" passHref legacyBehavior>
                 <a>
                   <i className="uil uil-comment" /> 3<span> Comments</span>
                 </a>
               </Link>
-            </li>
+            </li> */}
 
-            <li className="post-likes ms-auto">
+            {/* <li className="post-likes ms-auto">
               <Link href="#" passHref legacyBehavior>
                 <a>
                   <i className="uil uil-heart-alt" />3
                 </a>
               </Link>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>

@@ -2,8 +2,6 @@ import { NextPage } from 'next';
 import { Fragment } from 'react';
 // -------- custom component -------- //
 import { Navbar } from 'components/blocks/navbar';
-import { Footer8 } from 'components/blocks/footer';
-import FigureImage from 'components/reuseable/FigureImage';
 import NextLink from 'components/reuseable/links/NextLink';
 
 const NotFound: NextPage = () => {
@@ -22,7 +20,7 @@ const NotFound: NextPage = () => {
           <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
             <div className="row">
               <div className="col-lg-9 col-xl-8 mx-auto">
-                <FigureImage width={800} height={316} src="/img/illustrations/404.png" className="mb-10" />
+                <img  src="/img/illustrations/404.png" className="mb-10" />
               </div>
 
               <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center">
@@ -40,7 +38,6 @@ const NotFound: NextPage = () => {
       </main>
 
       {/* ========== footer section ========== */}
-      <Footer8 />
     </Fragment>
   );
 };

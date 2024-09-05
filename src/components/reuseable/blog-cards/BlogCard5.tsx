@@ -1,63 +1,53 @@
 import dayjs from 'dayjs';
-import { FC } from 'react';
+import { FC,useEffect } from 'react';
 import Link from 'next/link';
 import NextLink from '../links/NextLink';
-
+import Image from 'next/image';
+// -------- custom hook -------- //
+import useLightBox from 'hooks/useLightBox';
 // ======================================================
 type BlogCard5Props = {
-  image: string;
   title: string;
-  author: string;
-  category: string;
-  comments: number;
-  createdAt: string;
+  url: string;
+  group: string;
+i:number;
 };
+
 // ======================================================
 
 const BlogCard5: FC<BlogCard5Props> = (props) => {
-  const { image, title, author, category, createdAt, comments } = props;
+  const { url, title,group,i } = props;
+  console.log("index---> ", i)
+  console.log('group ====> ', group)
+  useLightBox(group); // Pass the group to the hook
 
   return (
-    <figure className="overlay caption caption-overlay rounded mb-0">
-      <Link href="#" passHref legacyBehavior>
-        <a>
-          <img src={image} alt="" />
-          <span className="bg" />
-        </a>
-      </Link>
-
+    <figure className="overlay caption caption-overlay rounded mb-3" key={url}>
+    <figure className="hover-scale rounded cursor-dark">
+      <a href={url} data-glightbox data-gallery={group}>
+        <img
+         
+          src={url}
+          alt="demo"
+        />
+        <span className="bg" />
+      </a>
       <figcaption>
-        <span className="badge badge-lg bg-white text-uppercase mb-3">{category}</span>
-        <h2 className="post-title h3 mt-1 mb-3">
-          <NextLink title={title} href="#" />
-        </h2>
+        <span className="badge badge-lg bg-white text-uppercase mb-3">{title}</span>
+       
 
-        <ul className="post-meta text-white mb-0">
-          <li className="post-date">
-            <i className="uil uil-calendar-alt" />
-            <span>{dayjs(createdAt).format('DD MMM YYYY')}</span>
-          </li>
-
-          <li className="post-author">
-            <Link href="#" passHref legacyBehavior>
-              <a>
-                <i className="uil uil-user" />
-                <span>By {author}</span>
-              </a>
-            </Link>
-          </li>
-
-          <li className="post-comments">
-            <Link href="#" passHref legacyBehavior>
-              <a>
-                <i className="uil uil-comment" />
-                {comments} <span>Comments</span>
-              </a>
-            </Link>
-          </li>
-        </ul>
+       
       </figcaption>
+
     </figure>
+  </figure>
+      
+
+
+
+
+      
+ 
   );
 };
 

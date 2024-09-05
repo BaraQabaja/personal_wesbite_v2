@@ -13,45 +13,160 @@ export const portfolioList1 = [
 export const portfolioList2 = [
   {
     id: 0,
-    url: '#',
-    category: 'Mobile Design',
-    title: 'Cras Fermentum Sem',
-    image: { '1x': '/img/photos/sp1.jpg', '2x': '/img/photos/sp1@2x.jpg 2x' }
+    resources: [{title:'Try Demo',url:'https://trading-platform-bara.netlify.app'}],
+    description:  `
+    <p>
+      Large-scale trading platform similar to 
+      <a 
+        style="
+          color: #007bff; 
+          text-decoration: none; 
+          font-weight: 500; 
+          transition: color 0.3s ease, transform 0.3s ease;
+          border-bottom: 0.5px solid transparent;
+          padding-bottom: 0.5px;
+          display: inline-block;
+          position: relative;
+        " 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        href="https://pocketoption.com/en"
+        onMouseOver="this.style.color='#0056b3'; this.style.transform='scale(1.05)'; this.style.borderBottom='0.5px solid #0056b3';"
+        onMouseOut="this.style.color='#007bff'; this.style.transform='scale(1)'; this.style.borderBottom='0.5px solid transparent';"
+      >
+        PocketOption
+      </a> 
+      and 
+      <a 
+        style="
+          color: #007bff; 
+          text-decoration: none; 
+          font-weight: 500; 
+          transition: color 0.3s ease, transform 0.3s ease;
+          border-bottom: 0.5px solid transparent;
+          padding-bottom: 0.5px;
+          display: inline-block;
+          position: relative;
+        " 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        href="https://expertoption.com/"
+        onMouseOver="this.style.color='#0056b3'; this.style.transform='scale(1.05)'; this.style.borderBottom='0.5px solid #0056b3';"
+        onMouseOut="this.style.color='#007bff'; this.style.transform='scale(1)'; this.style.borderBottom='0.5px solid transparent';"
+      >
+        ExpertOption
+      </a>, 
+      in collaboration with 
+      <a 
+        style="
+          color: #007bff; 
+          text-decoration: none; 
+          font-weight: 500; 
+          transition: color 0.3s ease, transform 0.3s ease;
+          border-bottom: 0.5px solid transparent;
+          padding-bottom: 0.5px;
+          display: inline-block;
+          position: relative;
+        " 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        href="https://rytsensetech.com/"
+        onMouseOver="this.style.color='#0056b3'; this.style.transform='scale(1.05)'; this.style.borderBottom='0.5px solid #0056b3';"
+        onMouseOut="this.style.color='#007bff'; this.style.transform='scale(1)'; this.style.borderBottom='0.5px solid transparent';"
+      >
+        Rytsensetech
+      </a> 
+      (India) and 
+    
+      <strong>Dooption Startup</strong>
+      
+      (Palestine).
+
+
+    </p>
+    <p>Contributed as a key member of a 5-developer team in the development of this platform.</p>
+    <mark>Note: When visiting the Dooption website and selecting "Try Demo" from the navbar, you may notice that the chart is not functioning. This is due to the high cost of the  <a 
+    style="
+      color: #007bff; 
+      text-decoration: none; 
+      font-weight: 500; 
+      transition: color 0.3s ease, transform 0.3s ease;
+      border-bottom: 0.5px solid transparent;
+      padding-bottom: 0.5px;
+      display: inline-block;
+      position: relative;
+    " 
+    target="_blank" 
+    rel="noopener noreferrer" 
+    href="https://polygon.io/"
+    onMouseOver="this.style.color='#0056b3'; this.style.transform='scale(1.05)'; this.style.borderBottom='0.5px solid #0056b3';"
+    onMouseOut="this.style.color='#007bff'; this.style.transform='scale(1)'; this.style.borderBottom='0.5px solid transparent';"
+  >
+  Polygon.io
+  </a>  library we use for market data, which unfortunately makes it cost-prohibitive to keep the chart running continuously.</mark>
+  `,
+    title: 'Trading Platform Development',
+    image: [{group:'project-0',url:'/img/projects/dooption_candleChart.png',title:"Candle Chart"},{group:'project-0',url:'/img/projects/dooption_landingPage.png',title:"Landing Page"},{group:'project-0',url:'/img/projects/dooption_lineChart.png',title:"Line Chart"},{group:'project-0',url:'/img/projects/dooption_candleChart2.png',title:"Candle Chart Indicator"},{group:'project-0',url:'/img/projects/dooption_architectureDiagram.jpeg',title:"Dooption Architecture Diagram"}],
+    myRole:'Software Project Lead and Coordinator',
+    skill:['React.js' , 'Redux-toolkit', 'Syncfusion for UI Components', '.NET',  'API Handling','Polygon.io for market data','Tailwind CSS']
   },
   {
     id: 1,
-    url: '#',
-    category: 'Web Design',
-    title: 'Venenatis Euismod Vehicula',
-    image: { '1x': '/img/photos/sp2.jpg', '2x': '/img/photos/sp2@2x.jpg 2x' }
+    resources: [{title:'Try Demo',url:'https://sharkod.com/'}],
+    description: '<p>Simplify employees transactions, payroll and HR management.</p>',
+    title: 'Sharkod: Comprehensive HR Employee Management Platform for Organizations',
+   image:[{group:'project-1',url:'/img/projects/sharkod_landingPage.png',title:"Landing Page"},{group:'project-1',url:'/img/projects/sharkod_homePage.jpg',title:"Employee Home Page"},{group:'project-1',url:'/img/projects/sharkod_payroll.jpg',title:"Employee Payroll Calculation"},{group:'project-1',url:'/img/projects/sharkod_termination.png',title:"Employee Termination Request"},{group:'project-1',url:'/img/projects/sharkod_employeeProfile.png',title:"Employee Profile"},{group:'project-1',url:'/img/projects/sharkod_seo.png',title:"SEO Handling"}],
+    myRole:'Software Project Lead and Coordinator',
+    skill:['React.js', 'Next.js', 'Redux-toolkit', 'Syncfusion for UI Components', 'Tailwind CSS', 'Node.js', 'Express.js',  'API Handling', 'PostgreSQL', 'AWS S3']
   },
   {
     id: 2,
-    url: '#',
-    category: 'Stationary',
-    title: 'Tortor Tellus Cursus',
-    image: { '1x': '/img/photos/sp3.jpg', '2x': '/img/photos/sp3@2x.jpg 2x' }
-  },
+    resources: [{title:'Chrome Extension Github Repo',url:'https://github.com/BaraQabaja/turbograding_chrome_extension'},{title:'Backend Github Repo',url:'https://github.com/BaraQabaja/turbograding_backend'}],
+    description:  `
+    <p>
+      TurboGrading is a Chrome extension designed to enhance exam processing efficiency for 
+      <a 
+        style="
+          color: #007bff; 
+          text-decoration: none; 
+          font-weight: 500; 
+          transition: color 0.3s ease, transform 0.3s ease;
+          border-bottom: 0.5px solid transparent;
+          padding-bottom: 0.5px;
+          display: inline-block;
+          position: relative;
+        " 
+        target="_blank" 
+        rel="noopener noreferrer" 
+        href="https://www.d2l.com/?nav_version=v2"
+        onMouseOver="this.style.color='#0056b3'; this.style.transform='scale(1.05)'; this.style.borderBottom='0.5px solid #0056b3';"
+        onMouseOut="this.style.color='#007bff'; this.style.transform='scale(1)'; this.style.borderBottom='0.5px solid transparent';"
+      >
+        D2L
+      </a> 
+      exam platform.
+    </p>
+    <p>
+      It can read and extract specific data displayed on the exam screen, including professor 
+      information, student details, questions, and student answers. This data is then transmitted 
+      to a backend system, where it is processed using OpenAI tools to grade student responses 
+      and generate grades.
+    </p>
+  `,
+    title: 'Turbograding AI',
+    image:[{group:'project-2',url:'/img/projects/turbograding_landingPage_hero.png',title:"Landing Page"},{group:'project-2',url:'/img/projects/turbograding_D2L.png',title:"D2L Page, Here We Use Turbograding Chrome Extension"},{group:'project-2',url:'/img/projects/turbograding_dashboard1.png',title:"Dashboard"},{group:'project-2',url:'/img/projects/turbograding_dashboard2.png',title:"Dashboard"},{group:'project-2',url:'/img/projects/turbograding_profile.png',title:"Profesor Profile"},{group:'project-2',url:'/img/projects/turbograding_db.png',title:"Database Structure"},{group:'project-2',url:'/img/projects/turbograding_landingPage.png',title:"Full Landing Page"}],
+    myRole:'Full Stack Developer',
+    skill:['React.js', 'Next.js', 'Node.js', 'Express.js', 'PostgreSQL',  'API Handling', 'payment gateway - Stripe', 'Jira','Bootstrap']
+  }
+  ,
   {
     id: 3,
-    url: '#',
-    category: 'Web Application',
-    title: 'Ridiculus Sem Parturient',
-    image: { '1x': '/img/photos/sp4.jpg', '2x': '/img/photos/sp4@2x.jpg 2x' }
-  },
-  {
-    id: 4,
-    url: '#',
-    category: 'Web Design',
-    title: 'Cursus Sollicitudin Adipiscing',
-    image: { '1x': '/img/photos/sp5.jpg', '2x': '/img/photos/sp5@2x.jpg 2x' }
-  },
-  {
-    id: 5,
-    url: '#',
-    category: 'Stationary',
-    title: 'Fringilla Quam Vulputate',
-    image: { '1x': '/img/photos/sp6.jpg', '2x': '/img/photos/sp6@2x.jpg 2x' }
+    resources: [{title:'Try Demo',url:'https://github-users-data.netlify.app/login'},{title:'Github Repo',url:'https://github.com/BaraQabaja/react-search-users.git'}],
+    description: '  <strong>GitHub Users Data Portal</strong> <p>is an intuitive web application designed for retrieving and managing GitHub user information. This simple platform enables users to search for GitHub profiles, view detailed user data. With a user-friendly interface and seamless integration with GitHub’s API.</p>',
+    title: 'GitHub Users Data Portal',
+    image:[{group:'project-3',url:'/img/projects/githubSearch_profile.png',title:"Dashboard"},{group:'project-3',url:'/img/projects/githubSearch_loginLogout.png',title:"Login Page"}],
+    myRole:'Intern',
+    skill:['React.js','CSS','0Auth for Third-Party Login']
   }
 ];
 

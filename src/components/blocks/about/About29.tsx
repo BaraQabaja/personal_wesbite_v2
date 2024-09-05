@@ -1,12 +1,24 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 import Link from 'next/link';
 
 const About29: FC = () => {
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const toggleExpansion = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  
+
   return (
-    <div className="row gx-md-8 gx-xl-12 gy-6 align-items-center">
+    <div id="about" className="row gx-md-8 gx-xl-12 gy-6 align-items-center mb-20 mb-md-20">
       <div className="col-md-8 col-lg-6 order-lg-2 mx-auto">
         <div className="img-mask mask-2 px-xxl-8">
-          <img src="/img/photos/about28.jpg" srcSet="/img/photos/about28@2x.jpg 2x" alt="" />
+          <img
+            src="/img/Picture5-removebg-preview.jpg"
+            srcSet="/img/Picture5-removebg-preview.jpg 2x"
+            alt=""
+          />
         </div>
       </div>
 
@@ -16,24 +28,45 @@ const About29: FC = () => {
         </h2>
 
         <p className="lead fs-lg">
-          I'm Julia Sandbox, a corporate brand designer based in New York City. I’m very passionate about the work that
-          I do.
+        👋 Hello! I'm Bara Qabaja – a passionate and results-driven developer with a strong experience in both front-end and back-end development. With over two years of hands-on experience, I've honed my skills in crafting high-performing web applications using modern technologies.
         </p>
 
-        <p>
-          Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Fusce
-          dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
-          Etiam porta sem malesuada magna mollis euismod. Vestibulum id ligula.
-        </p>
+       
 
-        <p>
-          Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Aenean lacinia bibendum nulla
-          sed consectetur. Curabitur blandit tempus porttitor. Lorem ipsum dolor sit amet, consectetur.
-        </p>
+        {isExpanded && (
+          <>
+            <p>
+              🚀 My Expertise:
+              <ul>
+                <li>
+                  Front-End: Specializing in React.js and Next.js, I excel at building dynamic, responsive, and user-friendly interfaces.
+                </li>
+                <li>
+                  Back-End: Delivering robust solutions with Node.js and Express.js, I ensure efficient data management and secure API handling.
+                </li>
+              </ul>
+            </p>
 
-        <Link href="#" className="btn btn-primary rounded-pill mt-2">
-          Learn More
-        </Link>
+            <p>
+              💼 Projects: I've had the privilege of working on diverse and impactful projects:
+              <ul>
+                <li>A large-scale HR Management System currently in active development.</li>
+                <li>An AI-powered platform for TurboGrading Inc.</li>
+                <li>A Chrome extension to enhance technological capabilities.</li>
+              </ul>
+            </p>
+
+            <p>
+              - As a Software Project Lead at DoOption Startup, I further sharpened my project management skills, leading teams and coordinating complex software projects with precision.
+            </p>
+
+            
+          </>
+        )}
+
+<button className={`${isExpanded ?'btn btn-outline-primary rounded-pill':'btn btn-primary rounded-pill mt-2'}`} onClick={toggleExpansion}>
+              {isExpanded ? 'Show Less' : 'Read More'}
+            </button>
       </div>
     </div>
   );

@@ -27,33 +27,31 @@ const Footer19: FC = () => {
               {/* address widget column */}
               <Widget title="Address">
                 <address>
-                  Moonshine St. 14/05 <br className="d-none d-md-block" /> Light City, London, UK
+                   Ramallah City, West Bank, Palestine
                 </address>
               </Widget>
 
               {/* phone widget column */}
               <Widget title="Phone">
                 <p>
-                  00 (123) 456 78 90 <br />
-                  00 (987) 654 32 10
+                (+972) 059-938-7258
                 </p>
               </Widget>
 
               {/* email widget column */}
               <Widget title="E-mail">
                 <p>
-                  <a href="mailto:sandbox@email.com" className="link-body">
-                    sandbox@email.com
-                  </a>{' '}
+                  <a href="mailto:bara.qabaja@gmail.com" className="link-body">
+                  bara.qabaja@gmail.com                  </a>{' '}
                   <br className="d-none d-md-block" />
-                  <a href="mailto:help@sandbox.com" className="link-body">
-                    help@sandbox.com
+                  <a href="mailto:ceo@sharkod.com" className="link-body">
+                  ceo@sharkod.com
                   </a>
                 </p>
               </Widget>
             </div>
 
-            <p>© 2023 Sandbox. All rights reserved.</p>
+            <p>© 2024 Bara Qabaja. All rights reserved.</p>
 
             {/* social link list */}
             <SocialLinks className="nav social justify-content-center" />
