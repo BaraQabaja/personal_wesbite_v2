@@ -47,7 +47,10 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Sandbox - Modern & Multipurpose NextJS Template</title>
+        <title>Bara - Portfolio</title>
+        <link rel="icon" href="%PUBLIC_URL%/Picture1.png" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/Picture1.png" />
+
       </Head>
 
       <ThemeProvider>

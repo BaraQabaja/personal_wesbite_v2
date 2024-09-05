@@ -7,7 +7,7 @@ import { timelines } from 'data/demo-33';
 const About34: FC = () => {
   return (
     <div id="experience" className="row d-flex align-items-start gy-10 mb-18 mb-md-20" >
-      <div className="col-lg-5 position-lg-sticky" style={{ top: '8rem' }}>
+      <div className="col-12 col-lg-5 position-lg-sticky" style={{ top: '8rem' }}>
         <h2 className="display-2 mb-3">My experiences</h2>
 
         <p className="lead fs-24 pe-xxl-8">
@@ -35,7 +35,7 @@ const About34: FC = () => {
         
       </div>
 
-      <div className="col-lg-6 ms-auto">
+      <div className=" col-12 col-lg-7 ">
         <ul className="timeline">
           {timelines.map(({ description, duration, titleDetails, id, title }) => (
             <li className="timeline-item" key={id}>

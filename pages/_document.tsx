@@ -5,7 +5,10 @@ export default class SandBox extends Document {
     return (
       <Html lang="en">
         <Head>
-          <link rel="shortcut icon" href="/img/favicon.png" type="image/png" />
+          <link rel="shortcut icon" href="/Picture1.png" type="image/png" />
+          <title>Bara - Portfolio</title>
+        <link rel="icon" href="%PUBLIC_URL%/Picture1.png" />
+        <link rel="apple-touch-icon" href="%PUBLIC_URL%/Picture1.png" />
         </Head>
 
         <body>
