@@ -36,3 +36,7 @@ yarn-error.log*
 
 tools/node_modules
 tools/output
+
+# claude code — personal, machine-local files (CLAUDE.md and .claude/settings.json, launch.json, skills/ are shared and committed)
+.claude/settings.local.json
+CLAUDE.local.md
