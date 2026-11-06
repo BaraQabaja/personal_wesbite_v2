@@ -25,10 +25,10 @@ const Hero28: FC = () => {
               I’m a <em>software engineer</em> with Bachelor's degree in Computer Science.
             </h3>
             <p className="lead fs-22 text-white" style={slideInDownAnimate('1200ms')}>
-              Curious to learn more or connect? Feel free to drop me a line at my{' '}
-              <a href="mailto:bara.qabaja@gmail.com" title="Gmail"  target="_blank"
+              Curious to learn more or connect? Feel free to drop me a line at{' '}
+              <a href="mailto:hello@intersecthub.org" title="Email"  target="_blank"
   rel="noopener noreferrer" className="hover" style={{ color: 'var(--bs-google)' }}>
-              Gmail
+              hello@intersecthub.org
               </a>
               , and connect with me on{' '}
               <a href="https://www.linkedin.com/in/bara-qabaja/" title="LinkedIn"  target="_blank"

@@ -108,10 +108,7 @@ const Navbar: FC<NavbarProps> = (props) => {
           {/* ============= show contact info in the small device sidebar ============= */}
           <div className="offcanvas-footer d-lg-none">
             <div>
-            <NextLink title="ceo@sharkod.com" className="link-inverse" href="mailto:ceo@sharkod.com" />
-            <br />
-
-              <NextLink title="bara.qabaja@gmail.com" className="link-inverse" href="mailto:bara.qabaja@gmail.com" />
+              <NextLink title="hello@intersecthub.org" className="link-inverse" href="mailto:hello@intersecthub.org" />
               <br />
               <NextLink href="tel:(+972) 059-938-7258" title="(+972) 059-938-7258" />
               <br />

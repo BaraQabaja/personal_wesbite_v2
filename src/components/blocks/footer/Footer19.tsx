@@ -41,11 +41,8 @@ const Footer19: FC = () => {
               {/* email widget column */}
               <Widget title="E-mail">
                 <p>
-                  <a href="mailto:bara.qabaja@gmail.com" className="link-body">
-                  bara.qabaja@gmail.com                  </a>{' '}
-                  <br className="d-none d-md-block" />
-                  <a href="mailto:ceo@sharkod.com" className="link-body">
-                  ceo@sharkod.com
+                  <a href="mailto:hello@intersecthub.org" className="link-body">
+                  hello@intersecthub.org
                   </a>
                 </p>
               </Widget>
