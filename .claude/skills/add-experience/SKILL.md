@@ -29,16 +29,19 @@ If the previous current role ended, change its `duration` from `… - PRESENT` t
   titleDetails: ', Full-Time, Organisation, Location',  // leading comma, matches existing entries
   description: [
     'First bullet.',
-    'Second bullet. For a link, copy an existing styled <a …> block from this file.'
+    `Second bullet with a ${link('https://example.org/', 'linked name')}.`  // backticks when using link()
   ]
 }
 ```
 
-Each bullet is an HTML string rendered with `dangerouslySetInnerHTML`.
+Each bullet is an HTML string rendered with `dangerouslySetInnerHTML`. For links, use the `link(href, text)` helper
+defined above `timelines`; it outputs the same styled `<a>` as the existing links. If Bara supplies a PDF CV, pull
+link addresses from the PDF itself (`grep -aoE "/URI ?\([^)]*\)" file.pdf`) instead of guessing them.
 
 ## 3. CV (if it changed)
 
-- Put the new PDF in `public/` and update the `download href` in `About34.tsx` (currently `/BaraQabaja_CV15.pdf`).
+- Put the new PDF in `public/` with a versioned name (so browsers don't serve a cached old copy) and update the
+  `download href` in `About34.tsx` (currently `/BaraQabaja_CV_v17.pdf`).
   Delete the old PDF only if Bara agrees.
 - The "View CV" button points to a Google Drive link in `About34.tsx`. Ask Bara for the new link; don't guess.
 

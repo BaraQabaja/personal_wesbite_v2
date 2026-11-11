@@ -19,12 +19,12 @@ const About34: FC = () => {
         <a
           target="_blank"
           rel="noreferrer"
-          href="https://drive.google.com/file/d/1-zTC1F_ioHqf7Xb7BXXrGmY5SanZVejm/view?usp=sharing"
+          href="https://drive.google.com/file/d/1ohCO-gDEngAjYhSaxi4Yh6fNla36rQZy/view?usp=sharing"
           className="btn btn-primary btn-icon btn-icon-end m-2"
         >
           View CV <i className="uil uil-arrow-up-right" />
         </a>
-        <a download href="/BaraQabaja_CV15.pdf" className="btn btn-outline-primary btn-icon btn-icon-end m-2">
+        <a download href="/BaraQabaja_CV_v17.pdf" className="btn btn-outline-primary btn-icon btn-icon-end m-2">
           Download CV <i className="uil uil-arrow-down" />
         </a>
         <a  target="_blank"

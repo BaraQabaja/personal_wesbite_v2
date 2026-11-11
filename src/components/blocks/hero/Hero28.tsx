@@ -26,9 +26,9 @@ const Hero28: FC = () => {
             </h3>
             <p className="lead fs-22 text-white" style={slideInDownAnimate('1200ms')}>
               Curious to learn more or connect? Feel free to drop me a line at{' '}
-              <a href="mailto:hello@intersecthub.org" title="Email"  target="_blank"
+              <a href="mailto:hello@baraqabaja.com" title="Email"  target="_blank"
   rel="noopener noreferrer" className="hover" style={{ color: 'var(--bs-google)' }}>
-              hello@intersecthub.org
+              hello@baraqabaja.com
               </a>
               , and connect with me on{' '}
               <a href="https://www.linkedin.com/in/bara-qabaja/" title="LinkedIn"  target="_blank"

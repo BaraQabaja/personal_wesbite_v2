@@ -65,29 +65,49 @@ The whole site is `pages/index.tsx`, a stack of sections linked by the navbar vi
 | Social icons | `src/components/reuseable/SocialLinks.tsx` | Gmail, LinkedIn, GitHub, Upwork, LeetCode |
 | Mobile menu contacts | `src/components/blocks/navbar/Navbar.tsx` | offcanvas footer |
 
-Static files: CV PDF at `public/BaraQabaja_CV15.pdf`, project screenshots in `public/img/projects/`, profile photo `public/img/Picture5-removebg-preview.jpg`, favicon `public/Picture1.png`.
+Static files: CV PDF at `public/BaraQabaja_CV_v17.pdf` (the "View CV" button opens the same version on Google Drive; v15 was deleted 11 Nov 2026), project screenshots in `public/img/projects/`, profile photo `public/img/Picture5-removebg-preview.jpg`, favicon `public/Picture1.png`.
 
 Project skills for routine content updates: `/add-project`, `/add-experience`, `/add-tech-talk` (in `.claude/skills/`).
+
+Design skills **Impeccable** (`/impeccable`) and **Taste Skill** (`design-taste-frontend`) are installed **globally**
+for Bara's user (`~/.claude/skills/`), not in this repo. Their setup and security notes are in `~/.claude/CLAUDE.md`.
+Rules for this site:
+- The site keeps its current style. Impeccable's read-only commands (`critique`, `audit`, `document`) are fine. Only
+  run the ones that change the look (`bolder`, `colorize`, `typeset`, `layout`, `polish`, `overdrive`, `live`, ...)
+  when Bara asks for that change. If a hook finding suggests a restyle, report it rather than acting on it.
+- Use Taste Skill here **only when Bara names it or asks for a new page or full redesign**. Its house rules never
+  override this file: don't copy its `assets/` or `starter.html` into the project unasked, and **never apply its rule
+  9** (contacts on `.example`, no real-format phone) to the site's real email and phone.
 
 ## Conventions
 
 - Prettier config in `.prettierrc.js`: single quotes, semicolons, 2-space indent, 120 cols, no trailing commas. (Prettier itself isn't installed; follow the style by hand.)
 - Description fields in `timelines` and `portfolioList2` are **HTML strings** rendered with `dangerouslySetInnerHTML`. Content is authored by us only — never feed user input into them.
-- Inline links inside those strings repeat a long inline `style=` + `onMouseOver` block. Copy an existing `<a>` from the same file so new links look the same.
+- Inline links inside those strings use a long inline `style=` + `onMouseOver` block.
+  - In `timelines` (`demo-33.ts`), use the `link(href, text)` helper at the top of `timelines`. It produces that
+    exact markup.
+  - In `portfolio.ts`, copy an existing `<a>` from the same file so new links look the same.
 - `<img>` is allowed (lint rule disabled); `next/image` is imported in places but barely used.
 - The `Project` interface is duplicated in `Portfolio3.tsx` and `About30.tsx`. Change both together if the shape changes.
 
 ## Content rules
 
 - Never invent facts: dates, job titles, company names, metrics, links, or descriptions. If Bara hasn't supplied it, ask.
-- The site's contact email is **hello@intersecthub.org** (Hero28, Footer19, Navbar offcanvas, SocialLinks, navbar
-  Social). Write the address exactly as given and never "correct" the domain. Keep the phone number and email as
-  they are unless Bara changes them.
+- The site's contact email is **hello@baraqabaja.com** everywhere (since 11 Nov 2026):
+  - Hero28 and Footer19 (the E-mail widget).
+  - The Navbar offcanvas text.
+  - `SocialLinks`, the email icon in the footer and the mobile menu.
+  - Navbar `partials/Social.tsx`.
+  - It forwards to Bara's Gmail through Cloudflare Email Routing (see "Domain, DNS and email" above). Write it
+    exactly as given. Keep the phone number as it is unless Bara changes it.
+- The footer address stays **Ramallah City, West Bank, Palestine**, even though CV v17 says Hebron. Bara chose this
+  on 11 Nov 2026.
+- The Experience timeline follows Bara's latest CV (v17). Update it from a new CV only, keeping the CV's facts and
+  wording. Fixing obvious typos is fine.
 - If the site mentions Bara's employer Intersect, write it as **"Intersect"** (not "Intersect Innovation Hub", "Intersect Hub" or "IIH"); in Arabic it's انترسكت.
 
 ## Known issues (from the Nov 2026 audit — fix when touching nearby code)
 
-- `src/data/demo-33.ts`: the Rytsensetech link points to `https://sharkod.com`; "Upword" should be "Upwork".
 - `pages/index.tsx`: ticker label "Nest.ts" should be "NestJS"; several `<figure title="Some Title Quam Sit Ornare">` template leftovers; logo `alt=""` on every image.
 - `Portfolio3.tsx` heading says "our awesome projects" (template copy). `Blog6.tsx` renders a dummy `<Pagination>`.
 - `Footer19.tsx`: hardcoded "© 2024".
@@ -95,6 +115,29 @@ Project skills for routine content updates: `/add-project`, `/add-experience`, `
 - `src/theme/themeOptions.ts`: route `/` loads `/css/colors/blue.css`, which doesn't exist (404). Harmless, since blue is the default in `style.css`.
 - `sharp@0.31.3` is old; install may fail on new Node versions.
 - `public/img/` is ~158 MB, mostly unused template images (`photos/`, `demos/`, `illustrations/`). Some are pulled in by CSS, not JSX (e.g. `img/photos/lines.png` for the hero's `bg-lines`, `img/svg/hex.svg`), so grep `src/assets/scss` and `public/css` too and check the browser's network tab before deleting anything.
+
+Found in the 11 Nov 2026 full read of every live file:
+- `src/data/demo-33.ts`:
+  - Wording kept from the CV as-is: "enhance ... to enhance" (TurboGrading), "Architecting and implementing"
+    (present tense in a past role), "developers developed" (PalSoft).
+  - The `services` and `testimonials` exports are unused lorem-ipsum template data.
+- `BlogCard2.tsx` (Tech-Talks card):
+  - The date is hardcoded to "1 Sep 2023" for every post. Make it a prop before adding talks.
+  - "Read More" renders "undefined . . ." when the description has no `</p>`, and it shows even when there's nothing
+    more to read.
+- `BlogCard5.tsx` (project images): two leftover `console.log` calls fire on every render, every image has
+  `alt="demo"`, and dayjs/Link/Image/useEffect are imported but unused.
+- `About30.tsx`: the skill tags are `NextLink href="#"`, so clicking one jumps the page.
+- `About34.tsx`: unused `next/link` import.
+- `pages/404.tsx`: it renders the template's fake language switcher (En/Bn/Es/De) and a "Contact" button that links
+  to `#`.
+- `ThemeProvider.tsx`:
+  - It adds the colour and font CSS after hydration, so the font swaps in late. The font is Space Grotesk, with
+    IBM Plex Serif italic for `<em>`.
+  - A page loader always stays up for a fixed 1 s.
+  - `typeof window === undefined` compares against the value, not the string (harmless, since effects only run in the
+    browser).
+- The home page renders `<Info />` (hidden, with the fake `info@email.com`) but not Search, MiniCart or Language.
 
 ## Git workflow
 

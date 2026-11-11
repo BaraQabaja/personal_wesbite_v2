@@ -7,7 +7,7 @@ const Social = () => {
   return (
     <li className="nav-item">
       <nav className="nav social social-muted justify-content-end text-end">
-        <a href="mailto:hello@intersecthub.org" title="Email"  target="_blank"
+        <a href="mailto:hello@baraqabaja.com" title="Email"  target="_blank"
   rel="noopener noreferrer">
           <i  ><BiLogoGmail />
 </i>

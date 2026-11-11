@@ -16,7 +16,7 @@ const links = [
 const SocialLinks: FC<SocialLinksProps> = ({ className = 'nav social social-white mt-4' }) => {
   return (
     <nav className={className}>
-           <a href="mailto:hello@intersecthub.org" title="Email"  target="_blank"
+           <a href="mailto:hello@baraqabaja.com" title="Email"  target="_blank"
   rel="noopener noreferrer">
           <i  ><BiLogoGmail color="red"/>
 </i>
