@@ -1,10 +1,6 @@
-import Image from 'next/image';
-import { FC, Fragment } from 'react';
+import { FC, Fragment, useState } from 'react';
 import Carousel from 'components/reuseable/Carousel';
-
-import NextLink from 'components/reuseable/links/NextLink';
-import React, { useState } from 'react';
-import { Link,scroller } from 'react-scroll';
+import { scroller } from 'react-scroll';
 
 // -------- data -------- //
 import { portfolioList2 } from 'data/portfolio';
@@ -52,7 +48,7 @@ const Portfolio3: FC = () => {
           <div className="col-lg-10 col-xl-9 col-xxl-8 mx-auto text-center">
             <h2 className="fs-16 text-uppercase text-primary mb-3">Latest Projects</h2>
             <h3 className="display-3 mb-10">
-              Check out some of our awesome projects with creative ideas and great design.
+              A selection of projects I’ve built and led.
             </h3>
           </div>
         </div>
@@ -75,7 +71,7 @@ const Portfolio3: FC = () => {
                   <img
                     src={image[0].url}
                     srcSet={image[0].url}
-                    alt=""
+                    alt={`${title}: ${image[0].title}`}
                     data-bs-toggle="modal"
                     data-bs-target="#modal-02"
                     onClick={() => handleImageClick(props)}
@@ -86,7 +82,17 @@ const Portfolio3: FC = () => {
                 <div className="project-details d-flex justify-content-center flex-column">
                   <div className="post-header">
                     <h2 className="post-title h3">
-                      <NextLink title={title} className="link-dark" href="#" />
+                      {/* opens the same popup as the image (Bootstrap stops the "#" jump for modal toggles);
+                          this is also how keyboard users open a project */}
+                      <a
+                        href="#modal-02"
+                        className="link-dark"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modal-02"
+                        onClick={() => handleImageClick(props)}
+                      >
+                        {title}
+                      </a>
                     </h2>
                     {/* <div className="post-category text-ash">{description}</div> */}
                   </div>

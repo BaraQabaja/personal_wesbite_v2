@@ -64,8 +64,10 @@ The whole site is `pages/index.tsx`, a stack of sections linked by the navbar vi
 | Footer | `src/components/blocks/footer/Footer19.tsx` | address, phone, emails, © year |
 | Social icons | `src/components/reuseable/SocialLinks.tsx` | Gmail, LinkedIn, GitHub, Upwork, LeetCode |
 | Mobile menu contacts | `src/components/blocks/navbar/Navbar.tsx` | offcanvas footer |
+| `<title>`, description, link previews | `pages/index.tsx` `<Head>` | `site` in `src/data/site.ts` |
+| Fonts | `pages/_document.tsx` (font files) + `src/assets/css/space-font.css` (rules, imported in `_app.tsx` after the theme) | Space Grotesk + IBM Plex Serif italic |
 
-Static files: CV PDF at `public/BaraQabaja_CV_v17.pdf` (the "View CV" button opens the same version on Google Drive; v15 was deleted 11 Nov 2026), project screenshots in `public/img/projects/`, profile photo `public/img/Picture5-removebg-preview.jpg`, favicon `public/Picture1.png`.
+Static files: CV PDF at `public/BaraQabaja_CV_v17.pdf` (the "View CV" button opens the same version on Google Drive; v15 was deleted 11 Nov 2026), project screenshots in `public/img/projects/`, profile photo `public/img/Picture5-removebg-preview.jpg`, logo `public/Picture1.png` (resized icons in `public/icons/`), `public/robots.txt`, `public/sitemap.xml` (update `lastmod` when content changes).
 
 Project skills for routine content updates: `/add-project`, `/add-experience`, `/add-tech-talk` (in `.claude/skills/`).
 
@@ -102,42 +104,68 @@ Rules for this site:
     exactly as given. Keep the phone number as it is unless Bara changes it.
 - The footer address stays **Ramallah City, West Bank, Palestine**, even though CV v17 says Hebron. Bara chose this
   on 11 Nov 2026.
-- The Experience timeline follows Bara's latest CV (v17). Update it from a new CV only, keeping the CV's facts and
+- The Experience timeline follows Bara's latest CV (v17). It also includes the **Al Wasl Ventures Website**
+  project (from the CV's Projects section, Aug-Oct 2026), added at Bara's request. Keep it when syncing a new CV. Update it from a new CV only, keeping the CV's facts and
   wording. Fixing obvious typos is fine.
 - If the site mentions Bara's employer Intersect, write it as **"Intersect"** (not "Intersect Innovation Hub", "Intersect Hub" or "IIH"); in Arabic it's انترسكت.
 
 ## Known issues (from the Nov 2026 audit — fix when touching nearby code)
 
-- `pages/index.tsx`: ticker label "Nest.ts" should be "NestJS"; several `<figure title="Some Title Quam Sit Ornare">` template leftovers; logo `alt=""` on every image.
-- `Portfolio3.tsx` heading says "our awesome projects" (template copy). `Blog6.tsx` renders a dummy `<Pagination>`.
-- `Footer19.tsx`: hardcoded "© 2024".
-- `pages/_app.tsx` / `_document.tsx`: `%PUBLIC_URL%` favicon links are Create-React-App syntax and 404 in Next; `<title>` is duplicated. `public/manifest.json` is the CRA default.
-- `src/theme/themeOptions.ts`: route `/` loads `/css/colors/blue.css`, which doesn't exist (404). Harmless, since blue is the default in `style.css`.
+Phase 1 of the 11 Nov 2026 fix plan is done:
+- Tech-Talk dates come from a `date` prop; talk links open the post.
+- No `/#` links remain.
+- Every image has alt text.
+- The debug logs, filler data, unused imports, the 404-page leftovers and the email links that opened a new tab are
+  all fixed.
+- `progressbar.js` and `react-syntax-highlighter` were uninstalled.
+- Ticker logos keep `alt=""` on purpose: they're decorative, and the label sits next to them.
+
+Phase 2 (SEO, 11 Nov 2026) is done:
+- The page is server-rendered (about 36 KB of real HTML instead of a 1.7 KB spinner). The `loading` gate and
+  `src/theme/` (ThemeProvider and the per-route colour/font switcher) were removed.
+- Fonts load with the page.
+- There's one `<title>`, a meta description, a canonical URL, Open Graph and Twitter tags, and Person JSON-LD.
+- The hero name line is the page's `<h1>`, and the big line is an `<h2>` (inline `lineHeight: 1.35` keeps it
+  pixel-identical).
+- Favicon and manifest are fixed; robots.txt and the sitemap were added. The 404 page is `noindex`.
+- Verified against the previous commit in headless Chrome: 27 text styles are identical at 1366 px and 390 px, and
+  there are no console errors.
+- One visible side effect: the 404 page now also uses Space Grotesk. The old per-route switcher left it on the
+  theme's Manrope.
+- `public/css/fonts/space.css` and `public/css/colors/*` are no longer loaded (Phase 3 can delete them).
+
+Still open:
+- **Phases 3, 4 and 6** (template cleanup, security upgrades, going live): not started.
+- The LinkedIn embed in Tech-Talks shows Bara's LinkedIn headline, which still says "Intersect Innovation Hub". It can
+  only be fixed on LinkedIn (Bara's action).
+
+Bara's decisions (11 Nov 2026), already applied:
+- Title "Bara Qabaja".
+- The description is written from Bara's bio.
+- The preview image is `public/img/og-image.jpg` (made from the profile photo on the hero gradient). Rebuild it if
+  the photo or name line changes.
+- The Sharkod role is "Founder and Full-Stack Developer".
+- Projects heading: "A selection of projects I’ve built and led."
+- The 3 awkward CV phrases were fixed on the site. Keep the fixed wording when syncing a new CV unless the CV fixes
+  them itself.
+- The Tech-Talk page arrows **stay**.
+- The Sharkod payroll screenshot is **demo data**, so keep it.
 - `sharp@0.31.3` is old; install may fail on new Node versions.
 - `public/img/` is ~158 MB, mostly unused template images (`photos/`, `demos/`, `illustrations/`). Some are pulled in by CSS, not JSX (e.g. `img/photos/lines.png` for the hero's `bg-lines`, `img/svg/hex.svg`), so grep `src/assets/scss` and `public/css` too and check the browser's network tab before deleting anything.
 
 Found in the 11 Nov 2026 full read of every live file:
-- `src/data/demo-33.ts`:
-  - Wording kept from the CV as-is: "enhance ... to enhance" (TurboGrading), "Architecting and implementing"
-    (present tense in a past role), "developers developed" (PalSoft).
-  - The `services` and `testimonials` exports are unused lorem-ipsum template data.
-- `BlogCard2.tsx` (Tech-Talks card):
-  - The date is hardcoded to "1 Sep 2023" for every post. Make it a prop before adding talks.
-  - "Read More" renders "undefined . . ." when the description has no `</p>`, and it shows even when there's nothing
-    more to read.
-- `BlogCard5.tsx` (project images): two leftover `console.log` calls fire on every render, every image has
-  `alt="demo"`, and dayjs/Link/Image/useEffect are imported but unused.
-- `About30.tsx`: the skill tags are `NextLink href="#"`, so clicking one jumps the page.
-- `About34.tsx`: unused `next/link` import.
-- `pages/404.tsx`: it renders the template's fake language switcher (En/Bn/Es/De) and a "Contact" button that links
-  to `#`.
-- `ThemeProvider.tsx`:
-  - It adds the colour and font CSS after hydration, so the font swaps in late. The font is Space Grotesk, with
-    IBM Plex Serif italic for `<em>`.
-  - A page loader always stays up for a fixed 1 s.
-  - `typeof window === undefined` compares against the value, not the string (harmless, since effects only run in the
-    browser).
-- The home page renders `<Info />` (hidden, with the fake `info@email.com`) but not Search, MiniCart or Language.
+- CSS order matters: anything linked in `_document`'s `<Head>` loads **before** Next's app CSS, so it can't override
+  the theme. Put overrides in the bundle (import them in `_app.tsx` after `style.scss`), and keep only `@font-face`
+  files in `_document`.
+- `useTooltip()` in `pages/index.tsx` loads the itooltip library, but no element has the `.itooltip` class (Phase 3).
+- `npm audit --omit=dev` after Phase 1 reports 15 issues (3 critical, 10 high): next 13.3.0, swiper and sharp need
+  major upgrades (Phase 4). Do the Phase 3 template cleanup first, so there's less code to migrate.
+- Headless checks used in Phases 1 and 2 (they work even when the Browser pane is hidden): Chrome with
+  `--remote-debugging-port`, driven by Node's built-in WebSocket.
+  - For "no visual change" proof, build the last commit in a `git worktree` (junction its `node_modules` to this
+    repo's), run both with `next start` on separate ports, and compare `getComputedStyle` of the key text elements.
+  - When you're done, remove the junction with `cmd /c rmdir` **before** `git worktree remove`, so the real
+    `node_modules` is never touched.
 
 ## Git workflow
 

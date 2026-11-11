@@ -1,5 +1,7 @@
 import { NextPage } from 'next';
+import Head from 'next/head';
 import { Fragment } from 'react';
+import { site } from 'data/site';
 // -------- custom component -------- //
 import { Navbar } from 'components/blocks/navbar';
 import NextLink from 'components/reuseable/links/NextLink';
@@ -7,12 +9,14 @@ import NextLink from 'components/reuseable/links/NextLink';
 const NotFound: NextPage = () => {
   return (
     <Fragment>
+      <Head>
+        <title>{`Page not found | ${site.name}`}</title>
+        <meta name="robots" content="noindex" />
+      </Head>
+
       {/* ========== header section ========== */}
       <header className="wrapper bg-light">
-        <Navbar
-          language
-          button={<NextLink title="Contact" href="#" className="btn btn-sm btn-primary rounded-pill" />}
-        />
+        <Navbar />
       </header>
 
       <main className="content-wrapper">
@@ -20,7 +24,7 @@ const NotFound: NextPage = () => {
           <div className="container pt-12 pt-md-14 pb-14 pb-md-16">
             <div className="row">
               <div className="col-lg-9 col-xl-8 mx-auto">
-                <img  src="/img/illustrations/404.png" className="mb-10" />
+                <img src="/img/illustrations/404.png" className="mb-10" alt="Page not found" />
               </div>
 
               <div className="col-lg-8 col-xl-7 col-xxl-6 mx-auto text-center">

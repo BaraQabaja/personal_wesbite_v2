@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import Link from 'next/link';
 import { slideInDownAnimate } from 'utils/animation';
 
 const Hero28: FC = () => {
@@ -13,21 +12,23 @@ const Hero28: FC = () => {
         <div className="row">
           <div className="col-lg-3 mx-auto">
             <div className="img-mask mask-2" style={slideInDownAnimate('600ms')}>
-              <img src="/img/Picture5-removebg-preview.jpg" srcSet="/img/Picture5-removebg-preview.jpg 2x" alt="" />
+              <img src="/img/Picture5-removebg-preview.jpg" srcSet="/img/Picture5-removebg-preview.jpg 2x" alt="Bara Qabaja" />
             </div>
           </div>
         </div>
 
         <div className="row mt-10">
           <div className="col-md-10 col-lg-9 col-xxl-8 mx-auto text-center">
-            <h2 className="fs-17 text-uppercase text-white mb-3 " style={slideInDownAnimate('900ms')}>Hello! I'm Bara <span lang="ar">(براء)</span></h2>
-            <h3 className="display-1 mb-5 px-xl-12 text-white" style={slideInDownAnimate('1200ms')}>
-              I’m a <em>software engineer</em> with Bachelor's degree in Computer Science.
-            </h3>
+            {/* h1 = the page's main heading (for search engines and screen readers); styled by its classes, so it
+                looks the same as the h2 it replaced. The big line below is an h2 (was h3), same look. */}
+            {/* lineHeight 1.35 = the theme's h2 line height, so it stays pixel-identical (h1 default is 1.3) */}
+            <h1 className="fs-17 text-uppercase text-white mb-3 " style={{ ...slideInDownAnimate('900ms'), lineHeight: 1.35 }}>Hello! I'm Bara <span lang="ar">(براء)</span></h1>
+            <h2 className="display-1 mb-5 px-xl-12 text-white" style={slideInDownAnimate('1200ms')}>
+              I’m a <em>software engineer</em> with a Bachelor's degree in Computer Science.
+            </h2>
             <p className="lead fs-22 text-white" style={slideInDownAnimate('1200ms')}>
               Curious to learn more or connect? Feel free to drop me a line at{' '}
-              <a href="mailto:hello@baraqabaja.com" title="Email"  target="_blank"
-  rel="noopener noreferrer" className="hover" style={{ color: 'var(--bs-google)' }}>
+              <a href="mailto:hello@baraqabaja.com" title="Email" className="hover" style={{ color: 'var(--bs-google)' }}>
               hello@baraqabaja.com
               </a>
               , and connect with me on{' '}
@@ -35,7 +36,7 @@ const Hero28: FC = () => {
   rel="noopener noreferrer" className="hover" style={{ color: 'var(--bs-linkedin)' }}>
                 LinkedIn
               </a>
-              ,or dive into my code on {' '}
+              , or dive into my code on{' '}
               <a href="https://github.com/BaraQabaja" title="GitHub"  target="_blank"
   rel="noopener noreferrer" className="hover" style={{ color: 'var(--bs-apple)' }}>
               GitHub

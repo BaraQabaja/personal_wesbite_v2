@@ -1,8 +1,6 @@
 import { FC } from 'react';
-import Link from 'next/link';
 // -------- data -------- //
 import { timelines } from 'data/demo-33';
-// import CV from "/BaraQabaja_CV-31-08-2024.pdf";
 
 const About34: FC = () => {
   return (

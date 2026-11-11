@@ -1,6 +1,5 @@
-// import Link  from 'next/link';
-import LinkType from 'types/link';
 import { FC, Fragment, ReactElement, useRef } from 'react';
+import { useRouter } from 'next/router';
 import { Link } from 'react-scroll';
 
 // -------- custom hook -------- //
@@ -9,8 +8,6 @@ import useNestedDropdown from 'hooks/useNestedDropdown';
 // -------- custom component -------- //
 import NextLink from 'components/reuseable/links/NextLink';
 import SocialLinks from 'components/reuseable/SocialLinks';
-import ListItemLink from 'components/reuseable/links/ListItemLink';
-import DropdownToggleLink from 'components/reuseable/links/DropdownToggleLink';
 // -------- partial header component -------- //
 import Info from './partials/Info';
 import Search from './partials/Search';
@@ -44,9 +41,21 @@ type NavbarProps = {
 };
 // ===================================================================
 
+// Sections of the one-page site (ids in pages/index.tsx). Class names are unchanged from the template.
+const NAV_ITEMS = [
+  { to: 'home', label: 'Home', className: 'nav-link hover  pb-0 mb-5' },
+  { to: 'experience', label: 'Experience', className: 'nav-link hover pb-0 mb-5' },
+  { to: 'tech-talk', label: 'Tech-Talks', className: 'nav-link hover pb-0 mb-5' },
+  { to: 'projects', label: 'Projects', className: 'nav-link hover pb-0 mb-5 cursor-pointer' }
+];
+
 const Navbar: FC<NavbarProps> = (props) => {
   const { navClassName, info, search, social, language, button, cart, fancy, navOtherClass, stickyBox, logoAlt } =
     props;
+
+  // On the home page the links smooth-scroll to each section; on any other page (e.g. 404) they go to /#section.
+  const { pathname } = useRouter();
+  const onHomePage = pathname === '/';
 
   useNestedDropdown();
   const sticky = useSticky(350);
@@ -56,13 +65,6 @@ const Navbar: FC<NavbarProps> = (props) => {
   const logo = sticky ? 'logo-dark' : logoAlt ?? 'logo-dark';
   // dynamically added navbar classname
   const fixedClassName = 'navbar navbar-expand-lg center-nav transparent navbar-light navbar-clone fixed';
-
-  // render inner nav item links
-  // const renderLinks = (links: LinkType[]) => {
-  //   return links.map((item) => (
-  //     <ListItemLink href={item.url} title={item.title} linkClassName="dropdown-item" key={item.id} />
-  //   ));
-  // };
 
   // all main header contents
   const headerContent = (
@@ -80,29 +82,19 @@ const Navbar: FC<NavbarProps> = (props) => {
 
         <div className="offcanvas-body ms-lg-auto d-flex flex-column h-100">
           <ul className="navbar-nav">
-          <li className="nav-item ">
-              <Link to="home" spy={true} smooth={true} offset={-50} duration={500} className="nav-link hover  pb-0 mb-5">
-                Home
-              </Link>
-            </li>
-
-            {/* <li className="nav-item ">
-              <Link to="about" spy={true} smooth={true} offset={-50} duration={500} className="nav-link hover  pb-0 mb-5">
-                About
-              </Link>
-            </li> */}
- <li className="nav-item ">
-              <Link to="experience" spy={true} smooth={true} offset={-50} duration={500}  className="nav-link hover pb-0 mb-5">Experience</Link>
-            </li>
-            <li className="nav-item ">
-              <Link to="tech-talk" spy={true} smooth={true} offset={-50} duration={500}  className="nav-link hover pb-0 mb-5">Tech-Talks</Link>
-            </li>
-            <li className="nav-item ">
-              <Link to="projects" spy={true} smooth={true} offset={-50} duration={500} className="nav-link hover pb-0 mb-5 cursor-pointer">Projects</Link>
-            </li>
-
-           
-            
+            {NAV_ITEMS.map(({ to, label, className }) => (
+              <li className="nav-item " key={to}>
+                {onHomePage ? (
+                  <Link to={to} spy={true} smooth={true} offset={-50} duration={500} className={className}>
+                    {label}
+                  </Link>
+                ) : (
+                  <a href={`/#${to}`} className={className}>
+                    {label}
+                  </a>
+                )}
+              </li>
+            ))}
           </ul>
 
           {/* ============= show contact info in the small device sidebar ============= */}

@@ -1,102 +1,3 @@
-import Puzzle from 'icons/lineal/Puzzle';
-import Browser from 'icons/lineal/Browser';
-import Pentool from 'icons/lineal/Pentool';
-import SearchTwo from 'icons/lineal/SearchTwo';
-import Smartphone from 'icons/lineal/Smartphone';
-import VideoEditing from 'icons/lineal/VideoEditing';
-
-import color from 'utils/color';
-
-export const services = [
-  {
-    id: 1,
-    Icon: SearchTwo,
-    color: color.fuchsia,
-    title: 'User Research',
-    description: `Duis mollis gravida commodo id luctus erat porttitor ligula, nulla non metus auctor eget lacinia odio sem aget elit.`
-  },
-  {
-    id: 2,
-    Icon: Puzzle,
-    color: color.aqua,
-    title: 'Strategy & Planning',
-    description: `Duis mollis gravida commodo id luctus erat porttitor ligula, nulla non metus auctor eget lacinia odio sem aget elit.`
-  },
-  {
-    id: 3,
-    Icon: Smartphone,
-    color: color.yellow,
-    title: 'App Design',
-    description: `Duis mollis gravida commodo id luctus erat porttitor ligula, nulla non metus auctor eget lacinia odio sem aget elit.`
-  },
-  {
-    id: 4,
-    Icon: Pentool,
-    color: color.leaf,
-    title: 'Brand Design',
-    description: `Duis mollis gravida commodo id luctus erat porttitor ligula, nulla non metus auctor eget lacinia odio sem aget elit.`
-  },
-  {
-    id: 5,
-    Icon: VideoEditing,
-    color: color.orange,
-    title: 'Motion Graphic',
-    description: `Duis mollis gravida commodo id luctus erat porttitor ligula, nulla non metus auctor eget lacinia odio sem aget elit.`
-  },
-  {
-    id: 6,
-    Icon: Browser,
-    color: color.grape,
-    title: 'Web Design',
-    description: `Duis mollis gravida commodo id luctus erat porttitor ligula, nulla non metus auctor eget lacinia odio sem aget elit.`
-  }
-];
-
-export const testimonials = [
-  {
-    id: 1,
-    color: color.grape,
-    name: 'Coriss Ambady',
-    designation: 'Financial Analyst',
-    review: `Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Vestibulum id ligula porta felis euismod semper. Cras justo odio dapibus facilisis sociis.`
-  },
-  {
-    id: 2,
-    color: color.green,
-    name: 'Cory Zamora',
-    designation: 'Marketing Specialist',
-    review: `Fusce dapibus, tellus ac cursus tortor mauris condimentum fermentum massa justo sit amet. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Cras mattis consectetur purus sit amet fermentum.`
-  },
-  {
-    id: 3,
-    color: color.orange,
-    name: 'Nikolas Brooten',
-    designation: 'Sales Manager',
-    review: `Curabitur blandit tempus porttitor. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Nullam quis risus eget porta ac consectetur vestibulum. Donec sed odio dui consectetur.`
-  },
-  {
-    id: 4,
-    color: color.pink,
-    name: 'Coriss Ambady',
-    designation: 'Financial Analyst',
-    review: `Etiam adipiscing tincidunt elit convallis felis suscipit ut. Phasellus rhoncus tincidunt auctor. Nullam eu sagittis mauris. Donec non dolor ac elit aliquam tincidunt at at sapien.`
-  },
-  {
-    id: 5,
-    color: color.yellow,
-    name: 'Laura Widerski',
-    designation: 'Sales Specialist',
-    review: `Donec id elit non mi porta gravida at eget metus. Nulla vitae elit libero, a pharetra augue. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur.`
-  },
-  {
-    id: 6,
-    color: color.blue,
-    name: 'Jackie Sanders',
-    designation: 'Investment Planner',
-    review: `Maecenas sed diam eget risus varius blandit sit amet non magna. Cum sociis natoque penatibus magnis dis montes, nascetur ridiculus mus. Donec sed odio dui.`
-  }
-];
-
 // Inline link for the HTML strings in `timelines`. It renders exactly like the hand-written links it replaced
 // (blue, grows slightly and gets an underline on hover), so the Experience section looks the same.
 const link = (href: string, text: string) =>
@@ -121,7 +22,18 @@ export const timelines = [
     ]
   },
   {
+    // From the CV's PROJECTS section; listed here at Bara's request (11 Nov 2026)
     id: 2,
+    duration: 'AUG 2026 - OCT 2026',
+    title: 'Al Wasl Ventures Website',
+    titleDetails: ', Project',
+    description: [
+      `Built the bilingual (English/Arabic) website for ${link('https://alwaslventures.com/', 'Al Wasl Ventures')}, a UAE-based platform connecting founders with funding, talent and programs across MENA.`,
+      'Utilized: Next.js, React.js, Tailwind CSS, Vercel, Supabase.'
+    ]
+  },
+  {
+    id: 3,
     duration: 'FEB 2026 - JUL 2026',
     title: 'Project Lead',
     titleDetails: ', Part-Time, Wahj, Palestine',
@@ -131,7 +43,7 @@ export const timelines = [
     ]
   },
   {
-    id: 3,
+    id: 4,
     duration: 'APR 2024 - OCT 2024',
     title: 'Founder and Full-Stack Developer',
     titleDetails: ', Full-Time, Sharkod, Palestine',
@@ -143,7 +55,7 @@ export const timelines = [
     ]
   },
   {
-    id: 4,
+    id: 5,
     duration: 'JAN 2024 - APR 2024',
     title: 'Software Project Lead and Coordinator',
     titleDetails: ', Full-Time, DoOption Startup & Rytsensetech, Palestine and India (remote)',
@@ -155,25 +67,25 @@ export const timelines = [
     ]
   },
   {
-    id: 5,
+    id: 6,
     duration: 'SEP 2023 - FEB 2024',
     title: 'Full Stack Developer',
     titleDetails: ', Full-Time, TurboGrading Inc., Ontario, Canada',
     description: [
       'Worked on the development of a website system supporting AI services, focusing on subscription management, secure payments, and activity tracking.',
       'Involved in creating a user-friendly platform using React.js and Next.js that facilitates access to AI services.',
-      `Developed a Chrome extension to enhance technological capabilities to enhance exam processing efficiency for ${link('https://www.d2l.com/?nav_version=v2', 'D2L')} exam platform.`,
-      'Architecting and implementing robust back-end APIs using Node.js and Express.js to deliver essential services on the website.',
+      `Developed a Chrome extension to improve exam-processing efficiency on the ${link('https://www.d2l.com/?nav_version=v2', 'D2L')} platform.`,
+      'Architected and implemented robust back-end APIs using Node.js and Express.js to deliver essential services on the website.',
       'Leveraged: React.js, Next.js, Node.js, Express.js, PostgreSQL, API Handling, payment gateway - Stripe, Jira, and Bootstrap.'
     ]
   },
   {
-    id: 6,
+    id: 7,
     duration: 'JUN 2022 - APR 2023',
     title: 'Software Engineer',
     titleDetails: ', Intern, Palestine',
     description: [
-      'PalSoft Company (Mar 2023 – Apr 2023): Collaborated with a team of 3 developers developed front-end components using React.js.',
+      'PalSoft Company (Mar 2023 – Apr 2023): Collaborated with a team of 3 developers to build front-end components using React.js.',
       'M&S Group (June 2022 – Sept 2022): Designed and developed a Flutter application prototype with a focus on UI/UX design with Figma.'
     ]
   }

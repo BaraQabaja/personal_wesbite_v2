@@ -30,8 +30,9 @@ Add a new `<BlogCard2>` inside `<div className="blog classic-view">`, newest fir
 
 ```tsx
 <BlogCard2
-  link="<public post URL>"
+  link="<public post URL>"   // external URLs open in a new tab
   category="Software"
+  date="4 Oct 2023"          // the post's real publish date, 'D Mon YYYY'
   title="…"
   description={`<p>…</p>`}
   cardTop={
@@ -42,7 +43,9 @@ Add a new `<BlogCard2>` inside `<div className="blog classic-view">`, newest fir
 />
 ```
 
-The existing card uses `link="#"`. Set a real URL for new ones.
+`date` is required; never guess it. For a LinkedIn post you can decode it from the post id (the first 41 bits are
+milliseconds since the Unix epoch): `node -e 'console.log(new Date(Number(BigInt("<id>") >> 22n)))'`. "Read More"
+only appears when the description has more than two paragraphs.
 
 ## 4. Verify
 

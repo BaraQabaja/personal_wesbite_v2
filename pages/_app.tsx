@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import type { AppProps } from 'next/app';
-import { Fragment, useEffect, useState } from 'react';
-import ThemeProvider from 'theme/ThemeProvider';
+import { Fragment, useEffect } from 'react';
 
 // animate css
 import 'animate.css';
@@ -20,10 +19,14 @@ import 'glightbox/dist/css/glightbox.css';
 import 'plugins/scrollcue/scrollCue.css';
 // Bootstrap and custom scss
 import 'assets/scss/style.scss';
+// site font rules: must come after the theme so they override it
+import 'assets/css/space-font.css';
 
+// The page is rendered on the server, so search engines and link previews get the full content.
+// (The template used to show only a loading spinner until the JavaScript ran, and to switch colour/font
+// stylesheets per route from src/theme; the font is now loaded via pages/_document.tsx + assets/css/space-font.css.)
 function MyApp({ Component, pageProps }: AppProps) {
   const { pathname } = useRouter();
-  const [loading, setLoading] = useState(true);
 
   // added bootstrap functionality
   useEffect(() => {
@@ -39,24 +42,13 @@ function MyApp({ Component, pageProps }: AppProps) {
     })();
   }, [pathname]);
 
-  // manage loading status
-  useEffect(() => setLoading(false), []);
-
   return (
     <Fragment>
       <Head>
-        <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Bara - Portfolio</title>
-        <link rel="icon" href="%PUBLIC_URL%/Picture1.png" />
-        <link rel="apple-touch-icon" href="%PUBLIC_URL%/Picture1.png" />
-
       </Head>
 
-      <ThemeProvider>
-        {/* <div className="page-loader" /> */}
-        {loading ? <div className="page-loader" /> : <Component {...pageProps} />}
-      </ThemeProvider>
+      <Component {...pageProps} />
     </Fragment>
   );
 }

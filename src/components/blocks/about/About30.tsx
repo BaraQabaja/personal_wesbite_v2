@@ -1,6 +1,5 @@
 import { FC, Fragment } from 'react';
 // -------- data -------- //
-import NextLink from 'components/reuseable/links/NextLink';
 import { BlogCard5 } from 'components/reuseable/blog-cards';
 
 
@@ -93,7 +92,8 @@ const About30: FC<About30Props> = ({ project }) => {
             
 
                   project.skill.map((item,index)=><li key={index}>
-                  <NextLink title={item} href="#" className="btn btn-soft-ash btn-sm rounded-pill" />
+                  {/* a label, not a link: <a> without href keeps the pill's look without jumping the page */}
+                  <a className="btn btn-soft-ash btn-sm rounded-pill">{item}</a>
                 </li>)
 }
                 </ul>
@@ -109,18 +109,10 @@ const About30: FC<About30Props> = ({ project }) => {
         <div className="col-lg-7">
         <div className="card-body mb-n2">
 
-        {/* {
-
-            
-
-project.image.map((item,index)=><li key={index}>
-<NextLink title={item} href="#" className="btn btn-soft-ash btn-sm rounded-pill" />
-</li>)
-} */}
 
 
             {project.image.map((item,index) => (
-              <BlogCard5 key={index} {...item} i={index}/>
+              <BlogCard5 key={index} {...item} />
             ))}
           </div>
           </div>

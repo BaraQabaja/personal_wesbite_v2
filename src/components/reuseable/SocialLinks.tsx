@@ -16,8 +16,7 @@ const links = [
 const SocialLinks: FC<SocialLinksProps> = ({ className = 'nav social social-white mt-4' }) => {
   return (
     <nav className={className}>
-           <a href="mailto:hello@baraqabaja.com" title="Email"  target="_blank"
-  rel="noopener noreferrer">
+           <a href="mailto:hello@baraqabaja.com" title="Email">
           <i  ><BiLogoGmail color="red"/>
 </i>
         </a>
@@ -40,7 +39,7 @@ const SocialLinks: FC<SocialLinksProps> = ({ className = 'nav social social-whit
         </a>
         <a href="https://leetcode.com/u/Bara_Qabaja/" title="LeetCode"  target="_blank"
   rel="noopener noreferrer">
-          <i >  <img src="/img/svg/leetcode.svg" className="text-muted" style={{width:'1rem'}} alt="" />
+          <i >  <img src="/img/svg/leetcode.svg" className="text-muted" style={{width:'1rem'}} alt="LeetCode" />
 </i>
         </a>
     </nav>

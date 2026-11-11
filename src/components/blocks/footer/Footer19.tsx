@@ -48,7 +48,7 @@ const Footer19: FC = () => {
               </Widget>
             </div>
 
-            <p>© 2024 Bara Qabaja. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Bara Qabaja. All rights reserved.</p>
 
             {/* social link list */}
             <SocialLinks className="nav social justify-content-center" />

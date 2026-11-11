@@ -1,6 +1,4 @@
 import { FC } from 'react';
-import Plyr from 'plyr-react';
-import Image from 'next/image';
 // -------- custom components -------- //
 import Pagination from 'components/reuseable/Pagination';
 import { BlogCard2 } from 'components/reuseable/blog-cards';
@@ -24,8 +22,9 @@ const Blog6: FC = () => {
          
 
           <BlogCard2
-            link="#"
+            link="https://www.linkedin.com/posts/bara-qabaja_javascript-eventloop-webdevelopment-activity-7115285751205883906-WthA"
             category="Software"
+            date="4 Oct 2023" // decoded from the LinkedIn post ID (activity 7115285751205883906)
             title="Explaining the Event Loop with a Simple Example"
             description={`
             <p><strong>🔍 Exploring the Event Loop: Unraveling the Magic Behind JavaScript 🧙‍♂️</strong></p>

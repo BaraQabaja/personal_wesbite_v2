@@ -1,53 +1,31 @@
-import dayjs from 'dayjs';
-import { FC,useEffect } from 'react';
-import Link from 'next/link';
-import NextLink from '../links/NextLink';
-import Image from 'next/image';
+import { FC } from 'react';
 // -------- custom hook -------- //
 import useLightBox from 'hooks/useLightBox';
 // ======================================================
 type BlogCard5Props = {
-  title: string;
+  title: string; // caption shown on the screenshot, also used as its alt text
   url: string;
   group: string;
-i:number;
 };
 
 // ======================================================
 
 const BlogCard5: FC<BlogCard5Props> = (props) => {
-  const { url, title,group,i } = props;
-  console.log("index---> ", i)
-  console.log('group ====> ', group)
+  const { url, title, group } = props;
   useLightBox(group); // Pass the group to the hook
 
   return (
     <figure className="overlay caption caption-overlay rounded mb-3" key={url}>
-    <figure className="hover-scale rounded cursor-dark">
-      <a href={url} data-glightbox data-gallery={group}>
-        <img
-         
-          src={url}
-          alt="demo"
-        />
-        <span className="bg" />
-      </a>
-      <figcaption>
-        <span className="badge badge-lg bg-white text-uppercase mb-3">{title}</span>
-       
-
-       
-      </figcaption>
-
+      <figure className="hover-scale rounded cursor-dark">
+        <a href={url} data-glightbox data-gallery={group}>
+          <img src={url} alt={title} />
+          <span className="bg" />
+        </a>
+        <figcaption>
+          <span className="badge badge-lg bg-white text-uppercase mb-3">{title}</span>
+        </figcaption>
+      </figure>
     </figure>
-  </figure>
-      
-
-
-
-
-      
- 
   );
 };
 
