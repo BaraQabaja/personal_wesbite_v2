@@ -38,16 +38,21 @@ in Phase 3 (Nov 2026), so every file in `src/` and `public/` is used. Don't re-a
 
 ```bash
 npm ci            # install from package-lock.json
-npm run dev       # dev server → http://localhost:3000
-npm run build     # production build (run before saying a change is done)
-npm run lint      # next lint (eslint next/core-web-vitals)
+npm run dev       # dev server (Turbopack) → http://localhost:3000
+npm run build     # production build (Turbopack; run before saying a change is done)
+npm run lint      # eslint . (ESLint 9 flat config in eslint.config.mjs; `next lint` no longer exists in Next 16)
 ```
 
 No test suite. Verify changes with `npm run build` + `npm run lint`, then check the page in the browser preview (`.claude/launch.json` → config `dev`).
 
 ## Stack
 
-Next.js 13.3 (**pages router**, not app router) · React 18.2 · TypeScript 4.9 (strict) · Bootstrap 5.3 (+ @popperjs/core) + Sass (compiled by Next from `src/assets/scss/style.scss`) · Swiper 9 · react-scroll · glightbox · animate.css · react-icons.
+Next.js 16.4 (**pages router**, not app router; Turbopack) · React 19.3 · TypeScript 5.9 (strict) · Bootstrap 5.3 (+ @popperjs/core) + Sass 1.108 (compiled by Next from `src/assets/scss/style.scss`; deprecation warnings silenced in `next.config.js`) · Swiper 14 (modules from `swiper/modules`) · react-scroll 1.9.3 · glightbox · animate.css · react-icons. Node ≥ 20.9.
+
+Next.js 16 is newer than most AI training data. Before using an unfamiliar Next API, read the bundled docs in
+`node_modules/next/dist/docs/` (that's what the auto-generated `AGENTS.md` says; `next dev` re-creates it, so keep it committed).
+React 19: no `defaultProps` on function components (use default parameter values), and don't read `ref.current`
+during render (the `react-hooks/refs` lint rule enforces this).
 Imports resolve from `src/` (`tsconfig.json` → `baseUrl: ./src`), e.g. `import { Hero28 } from 'components/blocks/hero'`.
 
 ## Where the content lives
@@ -153,7 +158,31 @@ Phase 3 (template cleanup, 11 Nov 2026) is done:
   temporarily (`npm i --no-save sharp`).
 
 Still open:
-- **Phases 4 and 6** (security upgrades for next and swiper, then going live): not started.
+- **Phase 6** (going live on baraqabaja.com): not started.
+
+Phase 4 (security upgrades, 11 Nov 2026) is done:
+- **Versions:**
+  - next 13.3.0 → 16.4.6, react/react-dom 18.2 → 19.3.1, swiper 9 → 14.4.0, react-scroll 1.9.0 → 1.9.3.
+  - sass 1.62 → 1.108, typescript 4.9 → 5.9.
+  - eslint 8 → 9, plus eslint-config-next 16 (flat config). `.eslintrc.json` was replaced by `eslint.config.mjs`.
+- **Production `npm audit`: 0 issues** (it was 20 before Phase 1).
+  - 7 moderate issues remain in the lint toolchain only: a `minimatch` ReDoS reached through typescript-eslint.
+    Nothing ships to visitors, and `npm audit fix` can't resolve it without breaking ESLint. Re-check after upgrading
+    eslint-config-next.
+- **Code changes:**
+  - `Carousel.tsx` imports modules from `swiper/modules`.
+  - `Navbar` defaults moved into the destructuring.
+  - `useSticky` measures the navbar height in its scroll handler instead of during render, so the lint rule passes.
+  - `Navbar` calls `scrollSpy.update()` once on load, so "Home" is highlighted straight away. react-scroll 1.9.3
+    otherwise waited for the first scroll.
+- **Verified** with headless Chrome against `main`, comparing all 273 elements on 49 computed-style properties at
+  1366 px and 390 px, plus the open lightbox. Nothing visible changed. The only differences were a 1-unit RGB
+  rounding in one shadow, a flipped but equivalent gradient, 0.016 px of sub-pixel widths, and Next's hidden route
+  announcer.
+  - Every asset still loads. Popups, the lightbox, menu scrolling, the highlighted menu link and both carousels
+    work. `npm run dev` works too.
+- **After merging into a checkout that has the old packages,** run `npm ci` and restart `npm run dev`. The old Next
+  13 `node_modules` won't run this code.
 - The LinkedIn embed in Tech-Talks shows Bara's LinkedIn headline, which still says "Intersect Innovation Hub". It can
   only be fixed on LinkedIn (Bara's action).
 
@@ -175,8 +204,9 @@ Found in the 11 Nov 2026 full read of every live file:
 - CSS order matters: anything linked in `_document`'s `<Head>` loads **before** Next's app CSS, so it can't override
   the theme. Put overrides in the bundle (import them in `_app.tsx` after `style.scss`), and keep only `@font-face`
   files in `_document`.
-- `npm audit --omit=dev` after Phase 3 reports 8 issues (2 critical, 6 high). Next 13.3.0 and Swiper 9 need major
-  upgrades (Phase 4).
+- Comparing builds as CSS text is misleading after Phase 4. Turbopack splits CSS into several chunks, drops
+  `-webkit-` prefixes, and caches Sass output (a config change forces a recompile). Compare **computed styles in the
+  browser** instead.
 - Headless checks used in Phases 1 and 2 (they work even when the Browser pane is hidden): Chrome with
   `--remote-debugging-port`, driven by Node's built-in WebSocket.
   - For "no visual change" proof, build the last commit in a `git worktree` (junction its `node_modules` to this

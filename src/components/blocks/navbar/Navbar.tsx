@@ -1,6 +1,6 @@
-import { FC, Fragment, useRef } from 'react';
+import { FC, Fragment, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
-import { Link } from 'react-scroll';
+import { Link, scrollSpy } from 'react-scroll';
 
 // -------- custom hook -------- //
 import useSticky from 'hooks/useSticky';
@@ -27,15 +27,26 @@ const NAV_ITEMS = [
   { to: 'projects', label: 'Projects', className: 'nav-link hover pb-0 mb-5 cursor-pointer' }
 ];
 
-const Navbar: FC<NavbarProps> = (props) => {
-  const { navClassName, social, navOtherClass, stickyBox } = props;
+// Defaults live in the destructuring (React 19 drops defaultProps on function components).
+const Navbar: FC<NavbarProps> = ({
+  social = false,
+  stickyBox = true,
+  navOtherClass = 'navbar-other w-100 d-flex ms-auto',
+  navClassName = 'navbar navbar-expand-lg center-nav transparent navbar-light'
+}) => {
 
   // On the home page the links smooth-scroll to each section; on any other page (e.g. 404) they go to /#section.
   const { pathname } = useRouter();
   const onHomePage = pathname === '/';
 
-  const sticky = useSticky(350);
+  // react-scroll 1.9.3 only marks the current section's link "active" after the first scroll event; run one check
+  // on load so "Home" is highlighted straight away (as with 1.9.0).
+  useEffect(() => {
+    if (onHomePage) scrollSpy.update();
+  }, [onHomePage]);
+
   const navbarRef = useRef<HTMLElement | null>(null);
+  const { sticky, spacer } = useSticky(350, navbarRef);
 
   // navbar classname once the page is scrolled (sticky)
   const fixedClassName = 'navbar navbar-expand-lg center-nav transparent navbar-light navbar-clone fixed';
@@ -101,21 +112,13 @@ const Navbar: FC<NavbarProps> = (props) => {
 
   return (
     <Fragment>
-      {stickyBox && <div style={{ paddingTop: sticky ? navbarRef.current?.clientHeight : 0 }} />}
+      {stickyBox && <div style={{ paddingTop: sticky ? spacer : 0 }} />}
 
       <nav ref={navbarRef} className={sticky ? fixedClassName : navClassName}>
         <div className="container flex-lg-row flex-nowrap align-items-center">{headerContent}</div>
       </nav>
     </Fragment>
   );
-};
-
-// set default Props
-Navbar.defaultProps = {
-  social: false,
-  stickyBox: true,
-  navOtherClass: 'navbar-other w-100 d-flex ms-auto',
-  navClassName: 'navbar navbar-expand-lg center-nav transparent navbar-light'
 };
 
 export default Navbar;
