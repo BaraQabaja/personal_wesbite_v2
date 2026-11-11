@@ -183,6 +183,8 @@ Phase 4 (security upgrades, 11 Nov 2026) is done:
     work. `npm run dev` works too.
 - **After merging into a checkout that has the old packages,** run `npm ci` and restart `npm run dev`. The old Next
   13 `node_modules` won't run this code.
+- `next-env.d.ts` is gitignored. Next 16 regenerates it on every `dev`/`build`, with different paths for each.
+  Running `npx tsc --noEmit` on a fresh clone needs one `npm run dev` or `npm run build` first.
 - The LinkedIn embed in Tech-Talks shows Bara's LinkedIn headline, which still says "Intersect Innovation Hub". It can
   only be fixed on LinkedIn (Bara's action).
 
