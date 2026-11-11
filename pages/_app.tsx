@@ -11,8 +11,6 @@ import 'swiper/css/free-mode';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/thumbs';
-// video player css
-import 'plyr-react/plyr.css';
 // glightbox css
 import 'glightbox/dist/css/glightbox.css';
 // custom scrollcue css

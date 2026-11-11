@@ -6,7 +6,7 @@ description: Add or update a job/role in the Experience timeline of Bara's portf
 # Add or update an experience entry
 
 The Experience section is `src/components/blocks/about/About34.tsx`; it maps over the `timelines` array in
-`src/data/demo-33.ts`. Ignore `services` and `testimonials` in that file; they're unused template data.
+`src/data/demo-33.ts` (the file name is a template leftover; it only holds `timelines` and the `link()` helper).
 
 ## 1. Get the facts from Bara (never invent them)
 

@@ -1,7 +1,8 @@
 # Bara Qabaja — personal portfolio website
 
 Single-page portfolio for Bara Qabaja (software engineer, content creator).
-Built on the purchased **Sandbox React** template (ui-lib); most of `src/` is unused template code.
+Built on the purchased **Sandbox React** template (ui-lib). Unused template code, images and packages were removed
+in Phase 3 (Nov 2026), so every file in `src/` and `public/` is used. Don't re-add template files unless they're needed.
 
 - Repo: https://github.com/BaraQabaja/personal_wesbite_v2 (branch `main`)
 - Git account for this repo: `BaraQabaja` (pinned in local git config; this machine also has a second GitHub account saved, so don't change it)
@@ -40,14 +41,13 @@ npm ci            # install from package-lock.json
 npm run dev       # dev server → http://localhost:3000
 npm run build     # production build (run before saying a change is done)
 npm run lint      # next lint (eslint next/core-web-vitals)
-npm run sass      # recompile src/assets/scss → public/css (only for theme colour/font files)
 ```
 
 No test suite. Verify changes with `npm run build` + `npm run lint`, then check the page in the browser preview (`.claude/launch.json` → config `dev`).
 
 ## Stack
 
-Next.js 13.3 (**pages router**, not app router) · React 18.2 · TypeScript 4.9 (strict) · Bootstrap 5.3 + Sass · Swiper 9 · react-scroll · plyr-react · glightbox.
+Next.js 13.3 (**pages router**, not app router) · React 18.2 · TypeScript 4.9 (strict) · Bootstrap 5.3 (+ @popperjs/core) + Sass (compiled by Next from `src/assets/scss/style.scss`) · Swiper 9 · react-scroll · glightbox · animate.css · react-icons.
 Imports resolve from `src/` (`tsconfig.json` → `baseUrl: ./src`), e.g. `import { Hero28 } from 'components/blocks/hero'`.
 
 ## Where the content lives
@@ -132,10 +132,28 @@ Phase 2 (SEO, 11 Nov 2026) is done:
   there are no console errors.
 - One visible side effect: the 404 page now also uses Space Grotesk. The old per-route switcher left it on the
   theme's Manrope.
-- `public/css/fonts/space.css` and `public/css/colors/*` are no longer loaded (Phase 3 can delete them).
+
+Phase 3 (template cleanup, 11 Nov 2026) is done:
+- **Code:** 161 unused `src` code and style files were removed: template components, 105 icon components, plugins,
+  hooks, utils, types, and the colour/font SCSS used only by the old `npm run sass`. The duplicate font files in
+  `src/assets/fonts` went too. The navbar's dead
+  info/search/cart/language/button/fancy branches went too, along with `About29`, `useTooltip`, `useNestedDropdown`
+  and the plyr CSS.
+- **public/:** went from 1,550 files (163 MB) to 65 files (11 MB). The keep-list is:
+  - what the running site loaded (recorded across a scroll, every popup and lightbox, the 404 page, and desktop and
+    phone widths);
+  - what the code references, and what the built CSS references (`lines.png`, `hex.svg`, `blob.svg`, `blob2.svg`,
+    the Custom/Unicons fonts);
+  - plus Bara's originals: `img/Picture5.jpg`, `img/Picture5-removebg.png`, `img/svg/css.svg`, `img/svg/html.svg`.
+  - Before adding an image, put it in `public/` and reference it with an absolute path (`/img/...`).
+- **Packages:** uninstalled clipboard, dayjs, isotope-layout, itooltip, plyr-react, react-countup, scrollcue, sharp
+  and typewriter-effect. Keep `@popperjs/core`, which is Bootstrap's peer for menus. `npm audit` dropped from 15 to
+  8 (only next and swiper remain).
+- **Images:** `sharp` isn't installed anymore. To regenerate `public/icons/*` or `public/img/og-image.jpg`, install it
+  temporarily (`npm i --no-save sharp`).
 
 Still open:
-- **Phases 3, 4 and 6** (template cleanup, security upgrades, going live): not started.
+- **Phases 4 and 6** (security upgrades for next and swiper, then going live): not started.
 - The LinkedIn embed in Tech-Talks shows Bara's LinkedIn headline, which still says "Intersect Innovation Hub". It can
   only be fixed on LinkedIn (Bara's action).
 
@@ -150,16 +168,15 @@ Bara's decisions (11 Nov 2026), already applied:
   them itself.
 - The Tech-Talk page arrows **stay**.
 - The Sharkod payroll screenshot is **demo data**, so keep it.
-- `sharp@0.31.3` is old; install may fail on new Node versions.
-- `public/img/` is ~158 MB, mostly unused template images (`photos/`, `demos/`, `illustrations/`). Some are pulled in by CSS, not JSX (e.g. `img/photos/lines.png` for the hero's `bg-lines`, `img/svg/hex.svg`), so grep `src/assets/scss` and `public/css` too and check the browser's network tab before deleting anything.
+- Some images are pulled in by CSS, not JSX: `img/photos/lines.png` for the hero's `bg-lines`, and `img/svg/hex.svg`
+  for the photo mask. Before deleting any image, grep `src/assets/scss` and check the browser's network tab.
 
 Found in the 11 Nov 2026 full read of every live file:
 - CSS order matters: anything linked in `_document`'s `<Head>` loads **before** Next's app CSS, so it can't override
   the theme. Put overrides in the bundle (import them in `_app.tsx` after `style.scss`), and keep only `@font-face`
   files in `_document`.
-- `useTooltip()` in `pages/index.tsx` loads the itooltip library, but no element has the `.itooltip` class (Phase 3).
-- `npm audit --omit=dev` after Phase 1 reports 15 issues (3 critical, 10 high): next 13.3.0, swiper and sharp need
-  major upgrades (Phase 4). Do the Phase 3 template cleanup first, so there's less code to migrate.
+- `npm audit --omit=dev` after Phase 3 reports 8 issues (2 critical, 6 high). Next 13.3.0 and Swiper 9 need major
+  upgrades (Phase 4).
 - Headless checks used in Phases 1 and 2 (they work even when the Browser pane is hidden): Chrome with
   `--remote-debugging-port`, driven by Node's built-in WebSocket.
   - For "no visual change" proof, build the last commit in a `git worktree` (junction its `node_modules` to this

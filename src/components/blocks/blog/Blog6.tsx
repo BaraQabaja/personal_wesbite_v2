@@ -45,26 +45,9 @@ const Blog6: FC = () => {
           />
         </div>
 
-
-        {/* <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7115285527590756352?compact=1" height="399" width="710" frameborder="0" allowfullscreen="" title="Embedded post"></iframe>
-         */}
-
-        {/* https://www.linkedin.com/posts/bara-qabaja_javascript-eventloop-webdevelopment-activity-7115285751205883906-WthA?utm_source=share&utm_medium=member_desktop */}
-        {/* <div className="blog grid grid-view">
-          <div className="row isotope gx-md-8 gy-8 mb-8">
-            {blogList4.map((item) => (
-              <BlogCard3 {...item} key={item.id} />
-            ))}
-          </div>
-        </div> */}
-
         <Pagination className="justify-content-start" altStyle />
       </div>
       </div>
-
-      {/* <aside className="col-lg-4 sidebar mt-8 mt-lg-0">
-        <BlogSidebar thumbnail="/img/photos/f1.jpg" />
-      </aside> */}
     </div>
   );
 };

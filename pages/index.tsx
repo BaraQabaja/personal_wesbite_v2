@@ -11,12 +11,8 @@ import PageProgress from 'components/common/PageProgress';
 import { Blog6 } from 'components/blocks/blog';
 import { Portfolio3 } from 'components/blocks/portfolio';
 import Carousel from 'components/reuseable/Carousel';
-import useTooltip from 'hooks/useTooltip';
-
 
 const Home: NextPage = () => {
- 
-  useTooltip()
   return (
     <Fragment>
     {/* search results + link previews; edit the wording in src/data/site.ts */}
@@ -59,12 +55,7 @@ const Home: NextPage = () => {
 
       {/* ========== header section ========== */}
       <header   className="position-absolute w-100 pt-1">
-        <Navbar
-          logoAlt="logo-light"
-          navClassName="navbar navbar-expand-lg center-nav transparent navbar-dark caret-none"
-
-          social
-        />
+        <Navbar navClassName="navbar navbar-expand-lg center-nav transparent navbar-dark caret-none" social />
       </header>
 
     {/* ========== main content ========== */}

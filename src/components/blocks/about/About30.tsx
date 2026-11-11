@@ -33,24 +33,6 @@ interface About30Props {
 const About30: FC<About30Props> = ({ project }) => {
   return (
     <Fragment>
-      {/* <div className="row text-center">
-        <div className="col-md-11 col-lg-9 col-xl-8 col-xxl-7 mx-auto position-relative">
-          <img
-            src="/img/svg/doodle3.svg"
-            className="h-11 position-absolute d-none d-lg-block"
-            style={{ top: '-20%', right: '-12%' }}
-            alt=""
-          />
-
-          <img
-            src="/img/svg/doodle9.svg"
-            className="h-17 position-absolute d-none d-lg-block"
-            style={{ bottom: '5%', left: '-17%' }}
-            alt=""
-          />
-        </div>
-      </div> */}
-
       <div className="row d-flex align-items-start mb-19">
         <div className="col-lg-5 position-lg-sticky" style={{ top: '1rem' }}>
           <div className="d-flex align-items-start flex-column mb-5">

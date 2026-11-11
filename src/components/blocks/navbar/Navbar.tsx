@@ -1,42 +1,20 @@
-import { FC, Fragment, ReactElement, useRef } from 'react';
+import { FC, Fragment, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { Link } from 'react-scroll';
 
 // -------- custom hook -------- //
 import useSticky from 'hooks/useSticky';
-import useNestedDropdown from 'hooks/useNestedDropdown';
 // -------- custom component -------- //
 import NextLink from 'components/reuseable/links/NextLink';
 import SocialLinks from 'components/reuseable/SocialLinks';
 // -------- partial header component -------- //
-import Info from './partials/Info';
-import Search from './partials/Search';
 import Social from './partials/Social';
-
-import Language from './partials/Language';
-import MiniCart from './partials/MiniCart';
-// -------- data -------- //
-// import {
-//   demos,
-//   pages,
-//   blogsNavigation,
-//   blocksNavigation,
-//   projectsNavigation,
-//   documentionNavigation
-// } from 'data/navigation';
 
 // ===================================================================
 type NavbarProps = {
-  info?: boolean;
-  cart?: boolean;
-  fancy?: boolean;
-  logoAlt?: string;
-  search?: boolean;
-  social?: boolean;
-  language?: boolean;
+  social?: boolean; // show the social icons on the right (home page)
   stickyBox?: boolean;
   navClassName?: string;
-  button?: ReactElement;
   navOtherClass?: string;
 };
 // ===================================================================
@@ -50,30 +28,24 @@ const NAV_ITEMS = [
 ];
 
 const Navbar: FC<NavbarProps> = (props) => {
-  const { navClassName, info, search, social, language, button, cart, fancy, navOtherClass, stickyBox, logoAlt } =
-    props;
+  const { navClassName, social, navOtherClass, stickyBox } = props;
 
   // On the home page the links smooth-scroll to each section; on any other page (e.g. 404) they go to /#section.
   const { pathname } = useRouter();
   const onHomePage = pathname === '/';
 
-  useNestedDropdown();
   const sticky = useSticky(350);
   const navbarRef = useRef<HTMLElement | null>(null);
 
-  // dynamically render the logo
-  const logo = sticky ? 'logo-dark' : logoAlt ?? 'logo-dark';
-  // dynamically added navbar classname
+  // navbar classname once the page is scrolled (sticky)
   const fixedClassName = 'navbar navbar-expand-lg center-nav transparent navbar-light navbar-clone fixed';
 
   // all main header contents
   const headerContent = (
     <Fragment>
-      <div className="navbar-brand w-50 ">
-        {/* <NextLink href="/" title={<img alt="logo" src={`/img/${logo}.png`} srcSet={`/img/${logo}@2x.png 2x`} />} /> */}
-      </div>
+      {/* empty brand slot keeps the template's layout (the logo was removed) */}
+      <div className="navbar-brand w-50 " />
 
-      
       <div id="offcanvas-nav" data-bs-scroll="true" className="navbar-collapse offcanvas offcanvas-nav offcanvas-start">
         <div className="offcanvas-header d-lg-none">
           <h3 className="text-white fs-30 mb-0"></h3>
@@ -113,44 +85,6 @@ const Navbar: FC<NavbarProps> = (props) => {
       {/* ============= right side header content ============= */}
       <div className={navOtherClass}>
         <ul className="navbar-nav flex-row align-items-center ms-auto">
-          {/* ============= language dropdwown ============= */}
-          {language && <Language />}
-
-          {/* ============= info button ============= */}
-          {/* {info && (
-            <li className="nav-item">
-              <a className="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-info">
-                <i className="uil uil-info-circle" />
-              </a>
-            </li>
-          )} */}
-
-          {/* ============= search icon button ============= */}
-          {search && (
-            <li className="nav-item">
-              <a className="nav-link" data-bs-toggle="offcanvas" data-bs-target="#offcanvas-search">
-                <i className="uil uil-search" />
-              </a>
-            </li>
-          )}
-
-          {/* ============= contact button ============= */}
-          {button && <li className="nav-item d-none d-md-block">{button}</li>}
-
-          {/* ============= shopping cart button ============= */}
-          {cart && (
-            <li className="nav-item">
-              <a
-                data-bs-toggle="offcanvas"
-                data-bs-target="#offcanvas-cart"
-                className="nav-link position-relative d-flex flex-row align-items-center"
-              >
-                <i className="uil uil-shopping-cart" />
-                <span className="badge badge-cart bg-primary">3</span>
-              </a>
-            </li>
-          )}
-
           {/* ============= social icons link ============= */}
           {social && <Social />}
 
@@ -170,42 +104,15 @@ const Navbar: FC<NavbarProps> = (props) => {
       {stickyBox && <div style={{ paddingTop: sticky ? navbarRef.current?.clientHeight : 0 }} />}
 
       <nav ref={navbarRef} className={sticky ? fixedClassName : navClassName}>
-        {fancy ? (
-          <div className="container">
-            <div className="navbar-collapse-wrapper bg-white d-flex flex-row flex-nowrap w-100 justify-content-between align-items-center">
-              {headerContent}
-            </div>
-          </div>
-        ) : (
-          <div className="container flex-lg-row flex-nowrap align-items-center">{headerContent}</div>
-        )}
+        <div className="container flex-lg-row flex-nowrap align-items-center">{headerContent}</div>
       </nav>
-
-      {/* ============= signin modal ============= */}
-      {/* <Signin /> */}
-
-      {/* ============= signup modal ============= */}
-      {/* <Signup /> */}
-
-      {/* ============= info sidebar ============= */}
-      {info && <Info />}
-
-      {/* ============= show search box ============= */}
-      {search && <Search />}
-
-      {/* ============= cart sidebar ============= */}
-      {cart && <MiniCart />}
     </Fragment>
   );
 };
 
-// set deafult Props
+// set default Props
 Navbar.defaultProps = {
-  cart: false,
-  info: false,
   social: false,
-  search: false,
-  language: false,
   stickyBox: true,
   navOtherClass: 'navbar-other w-100 d-flex ms-auto',
   navClassName: 'navbar navbar-expand-lg center-nav transparent navbar-light'
